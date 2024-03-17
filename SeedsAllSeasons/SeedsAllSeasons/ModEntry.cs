@@ -18,6 +18,11 @@ namespace SeedsAllSeasons
         public override void Entry(IModHelper helper)
         {
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
+            // read file
+            var model = this.Helper.Data.ReadJsonFile<ModData>("data.json");
+
+            //Monitor.Log("Harmony patched a prefix for CraftingRecipe.getNameFromIndex" + model);
+
         }
 
 
