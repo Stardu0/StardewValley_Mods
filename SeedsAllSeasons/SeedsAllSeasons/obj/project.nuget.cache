@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "KVzjSWSoSG3V2c/xdS0B5Aw1lBr0IJfB72wfvehXbdo95yW+zFquPkQP0jnlz3ygWwi3WsGLa8+xnIrySNf6og==",
+  "success": true,
+  "projectFilePath": "D:\\StardewMods\\StardewValley_Mods\\SeedsAllSeasons\\SeedsAllSeasons\\SeedsAllSeasons.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\minni\\.nuget\\packages\\pathoschild.stardew.modbuildconfig\\4.1.1\\pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}
