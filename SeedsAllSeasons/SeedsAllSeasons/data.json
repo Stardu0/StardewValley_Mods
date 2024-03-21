@@ -1,0 +1,20 @@
+{
+    "Format": "1.30.0",
+    "Changes": [
+        {
+            "Action": "EditData",
+            "Target": "Data/Shops",
+            "TargetField": [ "FishShop", "Items" ],
+            "Entries": {
+                "Example.ModId_Pufferfish": {
+                    "Id": "Example.ModId_Pufferfish",
+                    "ItemId": "(O)128",
+                    "Price": 2000
+                }
+            },
+            "MoveEntries": [
+                { "Id": "Example.ModId_Pufferfish", "BeforeId": "(O)685" }
+            ]
+        }
+    ]
+}
