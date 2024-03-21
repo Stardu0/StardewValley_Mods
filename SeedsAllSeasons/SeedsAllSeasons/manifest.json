@@ -1,10 +1,12 @@
 ﻿{
   "Name": "SeedsAllSeasons",
-  "Author": "Jihyun_Somin",
+  "Author": "JihyunSomin",
   "Version": "1.0.0",
   "Description": "Pierre sells all seeds regardless of the season",
-  "UniqueID": "Jihyun_Somin.SeedsAllSeasons",
-  "EntryDll": "SeedsAllSeasons.dll",
+  "UniqueID": "JihyunSomin.SeedsAllSeasons",
   "MinimumApiVersion": "3.0.0",
-  "UpdateKeys": []
+  "UpdateKeys": [],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  }
 }

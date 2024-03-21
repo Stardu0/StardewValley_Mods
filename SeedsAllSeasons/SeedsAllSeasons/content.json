@@ -1,0 +1,17 @@
+{
+    "Format": "2.0.0",
+    "Changes": [
+        {
+            "Action": "EditData",
+            "Target": "Data/Shops",
+            "TargetField": [ "SeedShop", "Items" ],
+            "Entries":{ 
+                "JihyunSomin.SeedsAllSeasons":{
+                    "Id": "JihyunSomin.SeedsAllSeasons_AddSeeds", 
+                    "ItemId": "ALL_ITEMS (O)",
+                    "PerItemCondition": "ITEM_CATEGORY Target -74 -17"
+                }
+            }
+        }
+    ]
+}
