@@ -1,0 +1,10 @@
+﻿{
+  "Name": "AutoEat",
+  "Author": "JihyunSomin",
+  "Version": "1.0.0",
+  "Description": "When your hp is low, you eat food that restores most health in your inventory",
+  "UniqueID": "JihyunSomin.AutoEat",
+  "EntryDll": "AutoEat.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}
