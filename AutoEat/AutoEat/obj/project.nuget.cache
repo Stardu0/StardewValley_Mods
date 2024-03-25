@@ -1,13 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9d4zNgfiVQAWqYogqOiWEkJWu/S54qZhh2B9KKo51JwVfoVuUo1dTGYv/sxD32+R/yrf44F+J28SAeYlHUQvZA==",
+  "dgSpecHash": "++VFe9GAKPDzZg3qCpvgbfhMZAL7OOcqUVlbqNna0P96Q+ZdtOLaWMbQiEG3WNzkrO3nU5sJ4X4hQzYjuAjPQw==",
   "success": true,
-  "projectFilePath": "D:\\StardewMods\\StardewValley_Mods\\AutoEat\\AutoEat\\AutoEat.csproj",
+  "projectFilePath": "/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoEat/AutoEat/AutoEat.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\minni\\.nuget\\packages\\pathoschild.stardew.modbuildconfig\\4.1.1\\pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512",
-    "C:\\Users\\minni\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.28\\microsoft.windowsdesktop.app.ref.6.0.28.nupkg.sha512",
-    "C:\\Users\\minni\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.28\\microsoft.netcore.app.ref.6.0.28.nupkg.sha512",
-    "C:\\Users\\minni\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.28\\microsoft.aspnetcore.app.ref.6.0.28.nupkg.sha512"
+    "/Users/ryujihyeun/.nuget/packages/pathoschild.stardew.modbuildconfig/4.1.1/pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512"
   ],
   "logs": []
 }
