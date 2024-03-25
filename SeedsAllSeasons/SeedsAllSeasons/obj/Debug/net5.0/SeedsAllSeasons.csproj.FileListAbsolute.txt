@@ -1,8 +1,0 @@
-D:\StardewMods\StardewValley_Mods\SeedsAllSeasons\SeedsAllSeasons\bin\Debug\net5.0\SeedsAllSeasons.deps.json
-D:\StardewMods\StardewValley_Mods\SeedsAllSeasons\SeedsAllSeasons\bin\Debug\net5.0\SeedsAllSeasons.dll
-D:\StardewMods\StardewValley_Mods\SeedsAllSeasons\SeedsAllSeasons\obj\Debug\net5.0\SeedsAllSeasons.csproj.AssemblyReference.cache
-D:\StardewMods\StardewValley_Mods\SeedsAllSeasons\SeedsAllSeasons\obj\Debug\net5.0\SeedsAllSeasons.GeneratedMSBuildEditorConfig.editorconfig
-D:\StardewMods\StardewValley_Mods\SeedsAllSeasons\SeedsAllSeasons\obj\Debug\net5.0\SeedsAllSeasons.AssemblyInfoInputs.cache
-D:\StardewMods\StardewValley_Mods\SeedsAllSeasons\SeedsAllSeasons\obj\Debug\net5.0\SeedsAllSeasons.AssemblyInfo.cs
-D:\StardewMods\StardewValley_Mods\SeedsAllSeasons\SeedsAllSeasons\obj\Debug\net5.0\SeedsAllSeasons.csproj.CoreCompileInputs.cache
-D:\StardewMods\StardewValley_Mods\SeedsAllSeasons\SeedsAllSeasons\obj\Debug\net5.0\SeedsAllSeasons.dll
