@@ -1,13 +1,17 @@
 ﻿<Properties>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="AutoEat/ModEntry.cs">
     <Files>
-      <File FileName="AutoEat/ModEntry.cs" Line="53" Column="44" />
+      <File FileName="AutoEat/ModEntry.cs" Line="66" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="AutoEat" expanded="True">
+          <Node name="AutoEat">
             <Node name="AutoEat">
               <Node name="ModEntry.cs" selected="True" />
             </Node>
@@ -17,8 +21,4 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
