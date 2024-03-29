@@ -5,6 +5,9 @@ using StardewValley.GameData;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
+using StardewValley.Objects;
+using StardewValley.Inventories;
+using StardewValley.Tools;
 
 namespace AutoEat
 {
@@ -36,12 +39,23 @@ namespace AutoEat
                 return;
 
             // print button presses to the console window
-            this.Monitor.Log($"{Game1.player.Name} pressed {e.Button}.", LogLevel.Debug);
+            //this.Monitor.Log($"{Game1.player.Name} pressed {e.Button}.", LogLevel.Debug);
         }
 
         private void OnUpdateTicked(object sender, EventArgs e)
         {
-            this.Monitor.Log($"{Game1.player.health}", LogLevel.Debug);
+            //this.Monitor.Log($"{Game1.player.health}", LogLevel.Debug);
+            if(Game1.player.health < Game1.player.maxHealth*0.3)
+            {
+                this.Monitor.Log("Warning!!", LogLevel.Debug);
+                const string Cheese_ID = "424";
+                Item cheese = new StardewValley.Object(Cheese_ID, 1, false, -1, 2);
+                int idx = Game1.player.getIndexOfInventoryItem(cheese);
+                if(idx >= 0)
+                {
+                    this.Monitor.Log($"idx:{idx}", LogLevel.Info);
+                }
+            }
         }
     }
 }
