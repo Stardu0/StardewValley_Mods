@@ -15,6 +15,7 @@ namespace AutoEat
     internal sealed class ModEntry : Mod
     {
         bool checkHealth = true;
+        bool checkSpeedBuff = true;
         /*********
         ** Public methods
         *********/
@@ -24,6 +25,7 @@ namespace AutoEat
         {
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
             helper.Events.GameLoop.UpdateTicked += this.OnUpdateTicked;
+            helper.Events.GameLoop.OneSecondUpdateTicked += this.OnOneSecondUpdateTicked;
         }
 
 
@@ -47,7 +49,7 @@ namespace AutoEat
         {
             if (Game1.player.health > Game1.player.maxHealth * 0.3) checkHealth = true;
 
-            if(Game1.player.health < Game1.player.maxHealth * 0.3 && checkHealth)
+            if (Game1.player.health < Game1.player.maxHealth * 0.3 && checkHealth)
             {
                 // set variables
                 const string Cheese_ID = "424";
@@ -63,7 +65,42 @@ namespace AutoEat
                     Game1.player.eatObject(cheeseObj);
                     Game1.player.Items.ReduceId(Cheese_ID, 1);
                 }
-            }
+            } 
         }
+
+        private void OnOneSecondUpdateTicked(object sender, EventArgs e)
+        {
+            // update checkSpeedBuff
+            if (Game1.player.hasBuff("drink"))
+            {
+                this.Monitor.Log($"Duration: {Game1.player.buffs.AppliedBuffs["drink"].millisecondsDuration}", LogLevel.Warn);
+                if (Game1.player.buffs.AppliedBuffs["drink"].millisecondsDuration < 2000)
+                {
+                    checkSpeedBuff = true;
+                }
+            }
+
+            // check buff id
+            if (!Game1.player.hasBuff("drink") && checkSpeedBuff)
+            {
+                // set variables TrippleShotEspresso = TSE
+                const string TSE_ID = "253";
+                Item TSE = new StardewValley.Object(TSE_ID, 1);
+                StardewValley.Object TSEObj = new StardewValley.Object(TSE_ID, 1);
+
+                // check buff has speed buff
+                if (Game1.player.buffs.Speed == 0 && Game1.player.getIndexOfInventoryItem(TSE) >= 0)
+                {
+                    checkSpeedBuff = false;
+                    Game1.player.eatObject(TSEObj);
+                    Game1.player.Items.ReduceId(TSE_ID, 1);
+                }
+            }
+
+            //this.Monitor.Log($"BuffIDs: {Game1.player.buffs.AppliedBuffIds}", LogLevel.Info);
+            //this.Monitor.Log($"BuffApplied: {Game1.player.buffs.Speed}", LogLevel.Info);
+            //this.Monitor.Log($"BuffMovement: {Game1.player.getMovementSpeed()}", LogLevel.Info);
+        }
+
     }
 }
