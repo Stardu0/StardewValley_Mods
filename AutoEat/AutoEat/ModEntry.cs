@@ -25,7 +25,9 @@ namespace AutoEat
         {
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
             helper.Events.GameLoop.UpdateTicked += this.OnUpdateTicked;
+            helper.Events.GameLoop.DayStarted += this.OnDayStarted;
             helper.Events.GameLoop.OneSecondUpdateTicked += this.OnOneSecondUpdateTicked;
+
         }
 
 
@@ -60,7 +62,6 @@ namespace AutoEat
 
                 if(idx >= 0)
                 {
-                    this.Monitor.Log($"idx:{idx}", LogLevel.Info);
                     checkHealth = false;
                     Game1.player.eatObject(cheeseObj);
                     Game1.player.Items.ReduceId(Cheese_ID, 1);
@@ -68,16 +69,23 @@ namespace AutoEat
             } 
         }
 
+        private void OnDayStarted(object sender, EventArgs e)
+        {
+            // drink Triple Shot Espresso when the player wakes up
+            const string TSE_ID = "253";
+            Item TSE = new StardewValley.Object(TSE_ID, 1);
+            StardewValley.Object TSEObj = new StardewValley.Object(TSE_ID, 1);
+            Game1.player.eatObject(TSEObj);
+            Game1.player.Items.ReduceId(TSE_ID, 1);
+
+        }
         private void OnOneSecondUpdateTicked(object sender, EventArgs e)
         {
+
             // update checkSpeedBuff
             if (Game1.player.hasBuff("drink"))
             {
-                this.Monitor.Log($"Duration: {Game1.player.buffs.AppliedBuffs["drink"].millisecondsDuration}", LogLevel.Warn);
-                if (Game1.player.buffs.AppliedBuffs["drink"].millisecondsDuration < 2000)
-                {
-                    checkSpeedBuff = true;
-                }
+                if (Game1.player.buffs.AppliedBuffs["drink"].millisecondsDuration < 2000) checkSpeedBuff = true;
             }
 
             // check buff id

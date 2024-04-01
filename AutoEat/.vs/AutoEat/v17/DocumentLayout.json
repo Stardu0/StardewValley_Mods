@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "AutoEat\\ModEntry.cs",
               "ToolTip": "D:\\StardewMods\\StardewValley_Mods\\AutoEat\\AutoEat\\ModEntry.cs",
               "RelativeToolTip": "AutoEat\\ModEntry.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAJAAAA",
+              "ViewState": "AQIAAFIAAAAAAAAAAAAqwD8AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-25T06:31:39.294Z",
               "EditorCaption": ""
@@ -47,21 +47,19 @@
               "RelativeToolTip": "AutoEat\\manifest.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-03-25T06:28:18.01Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-25T06:28:18.01Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AutoEat",
+              "Title": "AutoEat.csproj",
               "DocumentMoniker": "D:\\StardewMods\\StardewValley_Mods\\AutoEat\\AutoEat\\AutoEat.csproj",
               "RelativeDocumentMoniker": "AutoEat\\AutoEat.csproj",
               "ToolTip": "D:\\StardewMods\\StardewValley_Mods\\AutoEat\\AutoEat\\AutoEat.csproj",
               "RelativeToolTip": "AutoEat\\AutoEat.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-03-25T06:26:20.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-25T06:26:20.807Z"
             }
           ]
         }
