@@ -1,4 +1,5 @@
 # StardewValley_Mods
+Create StardewValley Mods by Somin and Jihyeun
 
 ## SeedsAllSeasons
 Pierre sells all seeds regardless of the season
