@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "xqmsP2rkg6WXsmf3WoFut00z+xRX/219afuhxGxE1FSE64mWs8C3NcmPFfPMHZc23KU7PKx1SEo+vNjUPtGFiA==",
+  "success": true,
+  "projectFilePath": "D:\\StardewMods\\StardewValley_Mods\\AutoEat\\AutoEat\\AutoConsume.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\minni\\.nuget\\packages\\pathoschild.stardew.modbuildconfig\\4.1.1\\pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512",
+    "C:\\Users\\minni\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.28\\microsoft.windowsdesktop.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\minni\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.28\\microsoft.netcore.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\minni\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.28\\microsoft.aspnetcore.app.ref.6.0.28.nupkg.sha512"
+  ],
+  "logs": []
+}
