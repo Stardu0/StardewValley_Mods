@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AutoConsume
-build_property.ProjectDir = D:\StardewMods\StardewValley_Mods\AutoEat\AutoEat\
+build_property.ProjectDir = D:\StardewMods\StardewValley_Mods\AutoConsume\AutoConsume\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

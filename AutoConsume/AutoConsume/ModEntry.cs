@@ -9,7 +9,7 @@ using StardewValley.Objects;
 using StardewValley.Inventories;
 using StardewValley.Tools;
 
-namespace AutoEat
+namespace AutoConsume
 {
     /// <summary>The mod entry point.</summary>
     internal sealed class ModEntry : Mod
@@ -56,17 +56,17 @@ namespace AutoEat
                 // set variables
                 const string Cheese_ID = "424";
                 Item cheese = new StardewValley.Object(Cheese_ID, 1, false, -1, 2);
-                StardewValley.Object cheeseObj = new StardewValley.Object(Cheese_ID,1,false,-1,2);
+                StardewValley.Object cheeseObj = new StardewValley.Object(Cheese_ID, 1, false, -1, 2);
                 // find cheese 
                 int idx = Game1.player.getIndexOfInventoryItem(cheese);
 
-                if(idx >= 0)
+                if (idx >= 0)
                 {
                     checkHealth = false;
                     Game1.player.eatObject(cheeseObj);
                     Game1.player.Items.ReduceId(Cheese_ID, 1);
                 }
-            } 
+            }
         }
 
         private void OnDayStarted(object sender, EventArgs e)

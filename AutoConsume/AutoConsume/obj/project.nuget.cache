@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xqmsP2rkg6WXsmf3WoFut00z+xRX/219afuhxGxE1FSE64mWs8C3NcmPFfPMHZc23KU7PKx1SEo+vNjUPtGFiA==",
+  "dgSpecHash": "rReifXotddxeAdaAcg6d4SQFVqeu4lFp/m0s0xG2hgIF4Bfw7rULpd+0vmahsntNNp3N+LJ/R/XJWcoZe3DcMw==",
   "success": true,
-  "projectFilePath": "D:\\StardewMods\\StardewValley_Mods\\AutoEat\\AutoEat\\AutoConsume.csproj",
+  "projectFilePath": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\AutoConsume.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\minni\\.nuget\\packages\\pathoschild.stardew.modbuildconfig\\4.1.1\\pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512",
     "C:\\Users\\minni\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.28\\microsoft.windowsdesktop.app.ref.6.0.28.nupkg.sha512",
