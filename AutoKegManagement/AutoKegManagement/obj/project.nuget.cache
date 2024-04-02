@@ -1,13 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ww5gy8DYnnIBpzvI06bJL4CtqAqTb69Vxt1OO3R7aAOc3iGWyzckPy9h/pU/GvNxnS1T+87KLybsiTgwRtxV/A==",
+  "dgSpecHash": "2T38kQVWWspn8O5cGcD1bIrTpOaCTxnwDIxuNtuDNHdJC8b4Uwc/zN5KeVoF509d+z9V1NfAFUkjc3gZ6obUBw==",
   "success": true,
-  "projectFilePath": "D:\\StardewMods\\StardewValley_Mods\\AutoKegManagement\\AutoKegManagement\\AutoKegManagement.csproj",
+  "projectFilePath": "/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/AutoKegManagement.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\minni\\.nuget\\packages\\pathoschild.stardew.modbuildconfig\\4.1.1\\pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512",
-    "C:\\Users\\minni\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.28\\microsoft.windowsdesktop.app.ref.6.0.28.nupkg.sha512",
-    "C:\\Users\\minni\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.28\\microsoft.netcore.app.ref.6.0.28.nupkg.sha512",
-    "C:\\Users\\minni\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.28\\microsoft.aspnetcore.app.ref.6.0.28.nupkg.sha512"
+    "/Users/ryujihyeun/.nuget/packages/pathoschild.stardew.modbuildconfig/4.1.1/pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512"
   ],
   "logs": []
 }

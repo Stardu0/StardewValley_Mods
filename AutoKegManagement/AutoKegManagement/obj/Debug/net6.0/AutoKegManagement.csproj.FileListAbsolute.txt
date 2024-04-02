@@ -1,0 +1,8 @@
+/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/bin/Debug/net6.0/AutoKegManagement.deps.json
+/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/bin/Debug/net6.0/AutoKegManagement.dll
+/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/obj/Debug/net6.0/AutoKegManagement.csproj.AssemblyReference.cache
+/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/obj/Debug/net6.0/AutoKegManagement.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/obj/Debug/net6.0/AutoKegManagement.AssemblyInfoInputs.cache
+/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/obj/Debug/net6.0/AutoKegManagement.AssemblyInfo.cs
+/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/obj/Debug/net6.0/AutoKegManagement.csproj.CoreCompileInputs.cache
+/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoKegManagement/AutoKegManagement/obj/Debug/net6.0/AutoKegManagement.dll
