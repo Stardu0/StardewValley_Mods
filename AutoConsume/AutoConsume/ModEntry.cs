@@ -26,7 +26,6 @@ namespace AutoConsume
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
             helper.Events.GameLoop.UpdateTicked += this.OnUpdateTicked;
             helper.Events.GameLoop.DayStarted += this.OnDayStarted;
-            helper.Events.GameLoop.OneSecondUpdateTicked += this.OnOneSecondUpdateTicked;
 
         }
 
@@ -49,6 +48,23 @@ namespace AutoConsume
 
         private void OnUpdateTicked(object sender, EventArgs e)
         {
+            EatCheese();
+            DrinkTrippleShotEspresso();
+        }
+
+        private void OnDayStarted(object sender, EventArgs e)
+        {
+            // drink Triple Shot Espresso when the player wakes up
+            const string TSE_ID = "253";
+            Item TSE = new StardewValley.Object(TSE_ID, 1);
+            StardewValley.Object TSEObj = new StardewValley.Object(TSE_ID, 1);
+            Game1.player.eatObject(TSEObj);
+            Game1.player.Items.ReduceId(TSE_ID, 1);
+
+        }
+
+        private void EatCheese()
+        {
             if (Game1.player.health > Game1.player.maxHealth * 0.3) checkHealth = true;
 
             if (Game1.player.health < Game1.player.maxHealth * 0.3 && checkHealth)
@@ -69,24 +85,15 @@ namespace AutoConsume
             }
         }
 
-        private void OnDayStarted(object sender, EventArgs e)
+        private void DrinkTrippleShotEspresso()
         {
-            // drink Triple Shot Espresso when the player wakes up
-            const string TSE_ID = "253";
-            Item TSE = new StardewValley.Object(TSE_ID, 1);
-            StardewValley.Object TSEObj = new StardewValley.Object(TSE_ID, 1);
-            Game1.player.eatObject(TSEObj);
-            Game1.player.Items.ReduceId(TSE_ID, 1);
-
-        }
-        private void OnOneSecondUpdateTicked(object sender, EventArgs e)
-        {
-
             // update checkSpeedBuff
             if (Game1.player.hasBuff("drink"))
             {
                 if (Game1.player.buffs.AppliedBuffs["drink"].millisecondsDuration < 2000) checkSpeedBuff = true;
             }
+
+            if (Game1.player.IsBusyDoingSomething()) return;
 
             // check buff id
             if (!Game1.player.hasBuff("drink") && checkSpeedBuff)
@@ -104,10 +111,6 @@ namespace AutoConsume
                     Game1.player.Items.ReduceId(TSE_ID, 1);
                 }
             }
-
-            //this.Monitor.Log($"BuffIDs: {Game1.player.buffs.AppliedBuffIds}", LogLevel.Info);
-            //this.Monitor.Log($"BuffApplied: {Game1.player.buffs.Speed}", LogLevel.Info);
-            //this.Monitor.Log($"BuffMovement: {Game1.player.getMovementSpeed()}", LogLevel.Info);
         }
 
     }
