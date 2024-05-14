@@ -1,24 +1,23 @@
 ﻿<Properties>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="AutoConsume/ModEntry.cs">
     <Files>
-      <File FileName="AutoConsume/ModEntry.cs" Line="136" Column="35" />
+      <File FileName="AutoConsume/config.json" Line="4" Column="15" IsPinned="True" />
+      <File FileName="AutoConsume/ModEntry.cs" Line="19" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="AutoConsume">
-            <Node name="AutoConsume">
-              <Node name="ModEntry.cs" selected="True" />
-            </Node>
+          <Node name="AutoConsume" expanded="True">
+            <Node name="AutoConsume" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
