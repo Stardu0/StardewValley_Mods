@@ -58,28 +58,55 @@ namespace AutoConsume
         {
             string healLabelText = "Auto Heal";
             string buffLabelText = "Auto Buff";
-
+            // clear and initialized
             this.ExitButton = new ClickableTextureComponent("exit-button", new Rectangle(this.xPositionOnScreen + menuWidth, this.yPositionOnScreen, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(337, 493, 13, 13), 3f);
             this.Labels.Clear();
             this.CheckBoxes.Clear();
-
-            //this.Labels.Add(new );
-            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + 45, this.yPositionOnScreen, 1, 1), healLabelText));
-            this.CheckBoxes.Add(new ClickableTextureComponent("check-box", new Rectangle(this.xPositionOnScreen, this.yPositionOnScreen, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
+            // set labels and checkboxes position
+            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth, 1, 1), healLabelText));
+            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth*2, 1, 1), buffLabelText));
+            this.CheckBoxes.Add(new ClickableTextureComponent("check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
+            this.CheckBoxes.Add(new ClickableTextureComponent("check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth*2, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
         }
 
+        private void handleButtonClick(string name)
+        {
+            Game1.playSound("coin");
+        }
+
+
         // overide
+        public override void receiveLeftClick(int x, int y, bool playSound = true)
+        {
+            base.receiveLeftClick(x, y, playSound);
+            foreach(ClickableTextureComponent checkbox in this.CheckBoxes.ToList())
+            {
+                if (checkbox.containsPoint(x, y))
+                {
+                    this.handleButtonClick(checkbox.name);
+                }
+            }
+
+            if (ExitButton.containsPoint(x, y))
+            {
+                this.handleButtonClick(ExitButton.name);
+            }
+        }
+
         public override void draw(SpriteBatch b)
         {
             // draw menu box
-            Game1.drawDialogueBox(this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, false, true);
+            IClickableMenu.drawTextureBox(b, this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, Color.Beige);
+            //Game1.drawDialogueBox(this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, false, true);
+            // draw exit button
             this.ExitButton.draw(b);
-
+            // draw text
             foreach (ClickableComponent label in this.Labels)
             {
                 Color color = Color.Violet;
                 Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color);
             }
+  
             foreach (ClickableComponent label in this.Labels)
             {
                 string text = "";
@@ -88,8 +115,9 @@ namespace AutoConsume
                 if (text.Length > 0)
                     Utility.drawTextWithShadow(b, text, Game1.smallFont, new Vector2(label.bounds.X + Game1.tileSize / 3 - Game1.smallFont.MeasureString(text).X / 2f, label.bounds.Y + Game1.tileSize / 2), color);
             }
-
-            foreach(ClickableTextureComponent checkbox in this.CheckBoxes)
+            
+            // draw check boxes
+            foreach (ClickableTextureComponent checkbox in this.CheckBoxes)
             {
                 checkbox.draw(b);
             }

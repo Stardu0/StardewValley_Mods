@@ -10,9 +10,6 @@ using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
 using StardewValley.Menus;
-//using StardewValley.Objects;
-//using StardewValley.Inventories;
-//using StardewValley.Tools;
 
 namespace AutoConsume
 {
