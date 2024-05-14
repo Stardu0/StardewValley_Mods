@@ -64,6 +64,9 @@ namespace AutoConsume
             if (Config.OpenMenuKey.JustPressed())
             {
                 this.Monitor.Log("pressed O.", LogLevel.Debug);
+                this.Monitor.Log($"{Game1.viewport.Width} : {Game1.viewport.Height}", LogLevel.Debug);
+                this.Monitor.Log($"{Game1.uiViewport.Width} : {Game1.uiViewport.Height}", LogLevel.Debug);
+                this.Monitor.Log($"{(Game1.viewport.Width - 100) / 2} : {Game1.uiViewport.Height}", LogLevel.Debug);
                 //Game1.activeClickableMenu = (IClickableMenu)(object)new CheatsMenu(Config.DefaultTab, Cheats.Value, ((Mod)this).Monitor, isNewMenu: true);
                 Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu();
             }

@@ -15,8 +15,8 @@ namespace AutoConsume
         private readonly List<ClickableComponent> Labels = new List<ClickableComponent>();
         private ClickableTextureComponent OkButton;
 
-        public static int menuWidth = 1032 + borderWidth * 2;
-        public static int menuHeight = 1000 + borderWidth * 2 + Game1.tileSize;
+        public static int menuWidth = (int)(Game1.uiViewport.Width/1.5);
+        public static int menuHeight = (int)(Game1.uiViewport.Height/1.5); 
 
         // Public Method
         public AutoConsumeMenu()
@@ -27,15 +27,15 @@ namespace AutoConsume
 
         public static Vector2 getAppropriateMenuPosition()
         {
-            Vector2 defaultPosition = new Vector2(Game1.viewport.Width / 2 - menuWidth / 2, (Game1.viewport.Height / 2 - menuHeight / 2));
+            Vector2 defaultPosition = new Vector2((Game1.uiViewport.Width - menuWidth)/2 , (Game1.uiViewport.Height - menuHeight)/2);
 
             //Force the viewport into a position that it should fit into on the screen???
-            if (defaultPosition.X + menuWidth > Game1.viewport.Width)
+            if (defaultPosition.X + menuWidth > Game1.uiViewport.Width)
             {
                 defaultPosition.X = 0;
             }
 
-            if (defaultPosition.Y + menuHeight > Game1.viewport.Height)
+            if (defaultPosition.Y + menuHeight > Game1.uiViewport.Height)
             {
                 defaultPosition.Y = 0;
             }
@@ -59,7 +59,6 @@ namespace AutoConsume
         }
 
         // overide
-
         public override void draw(SpriteBatch b)
         {
             // base.draw(b);
