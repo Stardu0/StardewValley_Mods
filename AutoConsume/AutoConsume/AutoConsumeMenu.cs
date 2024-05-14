@@ -13,7 +13,8 @@ namespace AutoConsume
     {
         // Fields
         private readonly List<ClickableComponent> Labels = new List<ClickableComponent>();
-        private ClickableTextureComponent OkButton;
+        private readonly List<ClickableTextureComponent> CheckBoxes = new List<ClickableTextureComponent>();
+        private ClickableTextureComponent ExitButton;
 
         public static int menuWidth = (int)(Game1.uiViewport.Width/1.5);
         public static int menuHeight = (int)(Game1.uiViewport.Height/1.5); 
@@ -22,7 +23,7 @@ namespace AutoConsume
         public AutoConsumeMenu()
             : base((int)getAppropriateMenuPosition().X, (int)getAppropriateMenuPosition().Y, menuWidth, menuHeight)
         {
-            this.setUpForGamePadMode();
+            this.setUpPositions();
         }
 
         public static Vector2 getAppropriateMenuPosition()
@@ -55,21 +56,47 @@ namespace AutoConsume
         // private method
         private void setUpPositions()
         {
-            this.OkButton = new ClickableTextureComponent("OK", new Rectangle(this.xPositionOnScreen + this.width - borderWidth - spaceToClearSideBorder - Game1.tileSize, this.yPositionOnScreen + this.height - borderWidth - spaceToClearTopBorder + Game1.tileSize / 4, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, Game1.getSourceRectForStandardTileSheet(Game1.mouseCursors, 46), 1f);
+            string healLabelText = "Auto Heal";
+            string buffLabelText = "Auto Buff";
+
+            this.ExitButton = new ClickableTextureComponent("exit-button", new Rectangle(this.xPositionOnScreen + menuWidth, this.yPositionOnScreen, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(337, 493, 13, 13), 3f);
+            this.Labels.Clear();
+            this.CheckBoxes.Clear();
+
+            //this.Labels.Add(new );
+            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + 45, this.yPositionOnScreen, 1, 1), healLabelText));
+            this.CheckBoxes.Add(new ClickableTextureComponent("check-box", new Rectangle(this.xPositionOnScreen, this.yPositionOnScreen, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
         }
 
         // overide
         public override void draw(SpriteBatch b)
         {
-            // base.draw(b);
             // draw menu box
             Game1.drawDialogueBox(this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, false, true);
-            IClickableMenu.drawTextureBox(b, this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, Color.AliceBlue);
+            this.ExitButton.draw(b);
+
+            foreach (ClickableComponent label in this.Labels)
+            {
+                Color color = Color.Violet;
+                Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color);
+            }
+            foreach (ClickableComponent label in this.Labels)
+            {
+                string text = "";
+                Color color = Game1.textColor;
+                Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color);
+                if (text.Length > 0)
+                    Utility.drawTextWithShadow(b, text, Game1.smallFont, new Vector2(label.bounds.X + Game1.tileSize / 3 - Game1.smallFont.MeasureString(text).X / 2f, label.bounds.Y + Game1.tileSize / 2), color);
+            }
+
+            foreach(ClickableTextureComponent checkbox in this.CheckBoxes)
+            {
+                checkbox.draw(b);
+            }
 
             const string Cheese_ID = "424";
             Item cheese = new StardewValley.Object(Cheese_ID, 1, false, -1, 2);
             StardewValley.Object cheeseObj = new StardewValley.Object(Cheese_ID, 1, false, -1, 2);
-            IClickableMenu.drawTextureBox(b, this.xPositionOnScreen, this.yPositionOnScreen, this.width / 10, this.height / 10, Color.LightSlateGray);
 
             // draw cursor
             this.drawMouse(b);
