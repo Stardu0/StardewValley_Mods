@@ -16,6 +16,9 @@ namespace AutoConsume
         private readonly List<ClickableTextureComponent> CheckBoxes = new List<ClickableTextureComponent>();
         private ClickableTextureComponent ExitButton;
         private ModConfig Config;
+        private Rectangle EmptyCheckBox = new Rectangle(227, 425, 9, 9);
+        private Rectangle FullCheckBox = new Rectangle(236, 425, 9, 9);
+        private const float ScaleFactor = 3f;
 
         public static int menuWidth = (int)(Game1.uiViewport.Width/1.5);
         public static int menuHeight = (int)(Game1.uiViewport.Height/1.5); 
@@ -67,8 +70,8 @@ namespace AutoConsume
             // set labels and checkboxes position
             this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth, 1, 1), healLabelText));
             this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth*2, 1, 1), buffLabelText));
-            this.CheckBoxes.Add(new ClickableTextureComponent("autoheal-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
-            this.CheckBoxes.Add(new ClickableTextureComponent("autobuff-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth*2, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
+            this.CheckBoxes.Add(new ClickableTextureComponent("autoheal-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth, (int)(EmptyCheckBox.Width*ScaleFactor), (int)(EmptyCheckBox.Height*ScaleFactor)), "", null, Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
+            this.CheckBoxes.Add(new ClickableTextureComponent("autobuff-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth*2, (int)(EmptyCheckBox.Width * ScaleFactor), (int)(EmptyCheckBox.Height * ScaleFactor)), "", null, Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
         }
 
         private void handleButtonClick(string name)
@@ -123,24 +126,27 @@ namespace AutoConsume
             // draw check boxes
             foreach (ClickableTextureComponent checkbox in this.CheckBoxes)
             {
+                // 체크 박스의 이름을 확인
+                // 체크 박스의 boolean 값을 확인
                 if (!Config.AutoHealKey && checkbox.name == "autoheal-check-box")
                 {
-                    checkbox.sourceRect = new Rectangle(227, 425, 9, 9);
+                    checkbox.sourceRect = EmptyCheckBox;
                     checkbox.draw(b);
                 }
                 if (Config.AutoHealKey && checkbox.name == "autoheal-check-box")
                 {
-                    checkbox.sourceRect = new Rectangle(236, 425, 9, 9);
+                    checkbox.sourceRect = FullCheckBox;
                     checkbox.draw(b);
                 }
+
                 if (!Config.AutoBuffKey && checkbox.name == "autobuff-check-box")
                 {
-                    checkbox.sourceRect = new Rectangle(227, 425, 9, 9);
+                    checkbox.sourceRect = EmptyCheckBox;
                     checkbox.draw(b);
                 }
                 if (Config.AutoBuffKey && checkbox.name == "autobuff-check-box")
                 {
-                    checkbox.sourceRect = new Rectangle(236, 425, 9, 9);
+                    checkbox.sourceRect = FullCheckBox;
                     checkbox.draw(b);
                 }
             }
