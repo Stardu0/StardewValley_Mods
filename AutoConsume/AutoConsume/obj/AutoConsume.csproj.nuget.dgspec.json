@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoConsume/AutoConsume/AutoConsume.csproj": {}
+    "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\AutoConsume.csproj": {}
   },
   "projects": {
-    "/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoConsume/AutoConsume/AutoConsume.csproj": {
+    "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\AutoConsume.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoConsume/AutoConsume/AutoConsume.csproj",
+        "projectUniqueName": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\AutoConsume.csproj",
         "projectName": "AutoConsume",
-        "projectPath": "/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoConsume/AutoConsume/AutoConsume.csproj",
-        "packagesPath": "/Users/ryujihyeun/.nuget/packages/",
-        "outputPath": "/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoConsume/AutoConsume/obj/",
+        "projectPath": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\AutoConsume.csproj",
+        "packagesPath": "C:\\Users\\minni\\.nuget\\packages\\",
+        "outputPath": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ryujihyeun/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\minni\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -49,16 +56,31 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.28, 6.0.28]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.28, 6.0.28]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.28, 6.0.28]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/6.0.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

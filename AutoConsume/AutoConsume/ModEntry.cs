@@ -86,6 +86,7 @@ namespace AutoConsume
         {
             // ignore if player hasn't loaded a save yet
             if (!Context.IsWorldReady) return;
+            if (!Config.AutoBuffKey) return;
 
             // check Buff
             if (!Game1.player.hasBuff("drink") && Game1.player.canMove && Game1.timeOfDay < 2400) ShouldDrink = true;
@@ -106,6 +107,7 @@ namespace AutoConsume
         {
             // ignore if player hasn't loaded a save yet
             if (!Context.IsWorldReady) return;
+            if (!Config.AutoHealKey) return;
 
             // check health
             if (Game1.player.health <= Game1.player.maxHealth * 0.3 && Game1.player.canMove) ShouldEat = true;
