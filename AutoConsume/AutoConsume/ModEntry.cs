@@ -38,10 +38,7 @@ namespace AutoConsume
         public override void Entry(IModHelper helper)
         {
             this.Config = this.Helper.ReadConfig<ModConfig>();
-            //bool autoHealkey = this.Config.AutoHealKey;
-            //bool autoBuffkey = this.Config.AutoBuffKey;
 
-            helper.Events.Input.ButtonPressed += this.OnButtonPressed;
             helper.Events.GameLoop.DayStarted += this.OnDayStarted;
             helper.Events.GameLoop.UpdateTicked += this.OnUpdateTicked;
             helper.Events.GameLoop.OneSecondUpdateTicked += OnOneSecondUpdateTicked;
@@ -57,12 +54,11 @@ namespace AutoConsume
         ///
         private void OnButtonChanged(object? sender, ButtonsChangedEventArgs e)
         {
+            if (!Game1.player.canMove) return;
+
             if (Config.OpenMenuKey.JustPressed())
             {
                 this.Monitor.Log("pressed O.", LogLevel.Debug);
-                this.Monitor.Log($"{Game1.viewport.Width} : {Game1.viewport.Height}", LogLevel.Debug);
-                this.Monitor.Log($"{Game1.uiViewport.Width} : {Game1.uiViewport.Height}", LogLevel.Debug);
-                this.Monitor.Log($"{(Game1.viewport.Width - 100) / 2} : {Game1.uiViewport.Height}", LogLevel.Debug);
 
                 // if  Auto Consume Menu is Open then close
                 if(Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu)
@@ -73,31 +69,19 @@ namespace AutoConsume
             }
         }
 
-        private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
-        {
-            // ignore if player hasn't loaded a save yet
-            if (!Context.IsWorldReady)
-                return;
-            // print button presses to the console window
-            // this.Monitor.Log($"{Game1.player.Name} pressed {e.Button}.", LogLevel.Debug);
-        }
-
         private void OnOneSecondUpdateTicked(object sender, EventArgs e)
         {
             // ignore if player hasn't loaded a save yet
             if (!Context.IsWorldReady) return;
             if (!Config.AutoBuffKey) return;
-
+            
             // check Buff
             if (!Game1.player.hasBuff("drink") && Game1.player.canMove && Game1.timeOfDay < 2400) ShouldDrink = true;
             else ShouldDrink = false;
 
-            //this.Monitor.Log($"CanMove: {Game1.player.canMove}", LogLevel.Debug);
-            //this.Monitor.Log($"timeofday: {Game1.timeOfDay}", LogLevel.Debug);
-
-            
             if (ShouldDrink)
             {
+                if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
                 DrinkTrippleShotEspresso();
             }
 
@@ -115,6 +99,7 @@ namespace AutoConsume
 
             if (ShouldEat)
             {
+                if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
                 EatCheese();
             }
 
