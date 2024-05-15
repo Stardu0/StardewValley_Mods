@@ -45,6 +45,7 @@ namespace AutoConsume
             helper.Events.Input.ButtonsChanged += this.OnButtonChanged;
         }
 
+        
         /*********
         ** Private methods
         *********/
@@ -69,6 +70,8 @@ namespace AutoConsume
             }
         }
 
+        
+        
         private void OnOneSecondUpdateTicked(object sender, EventArgs e)
         {
             // ignore if player hasn't loaded a save yet
@@ -76,7 +79,7 @@ namespace AutoConsume
             if (!Config.AutoBuffKey) return;
             
             // check Buff
-            if (!Game1.player.hasBuff("drink") && Game1.player.canMove && Game1.timeOfDay < 2400) ShouldDrink = true;
+            if (!Game1.player.hasBuff("drink") && Game1.player.canMove && Game1.timeOfDay < 2400 && !Game1.IsFading()) ShouldDrink = true;
             else ShouldDrink = false;
 
             if (ShouldDrink)
@@ -94,7 +97,7 @@ namespace AutoConsume
             if (!Config.AutoHealKey) return;
 
             // check health
-            if (Game1.player.health <= Game1.player.maxHealth * 0.3 && Game1.player.canMove) ShouldEat = true;
+            if (Game1.player.health <= Game1.player.maxHealth * 0.3 && Game1.player.canMove && !Game1.IsFading()) ShouldEat = true;
             else ShouldEat = false;
 
             if (ShouldEat)
@@ -126,7 +129,7 @@ namespace AutoConsume
                 Game1.player.Items.ReduceId(Cheese_ID, 1);
             }
         }
-
+        
         private void DrinkTrippleShotEspresso()
         {
             // set variable
