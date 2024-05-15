@@ -76,16 +76,20 @@ namespace AutoConsume
 
         private void handleButtonClick(string name)
         {
-            if (name == "autoheal-check-box")
+            switch (name)
             {
-                Config.AutoHealKey = !Config.AutoHealKey;
+                case "autoheal-check-box":
+                    Config.AutoHealKey = !Config.AutoHealKey;
+                    break;
+                case "autobuff-check-box":
+                    Config.AutoBuffKey = !Config.AutoBuffKey;
+                    break;
+                case "exit-button":
+                    this.exitThisMenu();
+                    break;
             }
 
-            if (name == "autobuff-check-box")
-            {
-                Config.AutoBuffKey = !Config.AutoBuffKey;
-            }
-            Game1.playSound("coin");
+            Game1.playSound("Ostrich");
         }
 
 
@@ -126,9 +130,6 @@ namespace AutoConsume
             // draw check boxes
             foreach (ClickableTextureComponent checkbox in this.CheckBoxes)
             {
-                // 체크 박스의 이름을 확인
-                // 체크 박스의 boolean 값을 확인
-
                 switch (checkbox.name)
                 {
                     case "autoheal-check-box":

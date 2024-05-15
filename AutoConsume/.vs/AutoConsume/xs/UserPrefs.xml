@@ -4,15 +4,16 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AutoConsume/ModEntry.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AutoConsume/AutoConsumeMenu.cs">
     <Files>
       <File FileName="AutoConsume/config.json" Line="4" Column="15" IsPinned="True" />
-      <File FileName="AutoConsume/ModEntry.cs" Line="19" Column="3" />
+      <File FileName="AutoConsume/ModEntry.cs" Line="70" Column="39" />
+      <File FileName="AutoConsume/AutoConsumeMenu.cs" Line="153" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="AutoConsume" expanded="True">
+          <Node name="AutoConsume">
             <Node name="AutoConsume" expanded="True" />
           </Node>
         </State>
