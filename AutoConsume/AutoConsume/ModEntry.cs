@@ -21,7 +21,6 @@ namespace AutoConsume
         public bool AutoBuffKey { get; set; }
     }
 
-    
 
     /// <summary>The mod entry point.</summary>
     internal sealed class ModEntry : Mod
@@ -39,8 +38,8 @@ namespace AutoConsume
         public override void Entry(IModHelper helper)
         {
             this.Config = this.Helper.ReadConfig<ModConfig>();
-            bool autoHealkey = this.Config.AutoHealKey;
-            bool autoBuffkey = this.Config.AutoBuffKey;
+            //bool autoHealkey = this.Config.AutoHealKey;
+            //bool autoBuffkey = this.Config.AutoBuffKey;
 
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
             helper.Events.GameLoop.DayStarted += this.OnDayStarted;
@@ -64,7 +63,13 @@ namespace AutoConsume
                 this.Monitor.Log($"{Game1.viewport.Width} : {Game1.viewport.Height}", LogLevel.Debug);
                 this.Monitor.Log($"{Game1.uiViewport.Width} : {Game1.uiViewport.Height}", LogLevel.Debug);
                 this.Monitor.Log($"{(Game1.viewport.Width - 100) / 2} : {Game1.uiViewport.Height}", LogLevel.Debug);
-                Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu();
+
+                // if  Auto Consume Menu is Open then close
+                if(Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu)
+                {
+                    autoConsumeMenu.exitThisMenu();
+                }
+                else Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu(Config);
             }
         }
 

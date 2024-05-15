@@ -15,14 +15,16 @@ namespace AutoConsume
         private readonly List<ClickableComponent> Labels = new List<ClickableComponent>();
         private readonly List<ClickableTextureComponent> CheckBoxes = new List<ClickableTextureComponent>();
         private ClickableTextureComponent ExitButton;
+        private ModConfig Config;
 
         public static int menuWidth = (int)(Game1.uiViewport.Width/1.5);
         public static int menuHeight = (int)(Game1.uiViewport.Height/1.5); 
 
         // Public Method
-        public AutoConsumeMenu()
+        public AutoConsumeMenu(ModConfig Config)
             : base((int)getAppropriateMenuPosition().X, (int)getAppropriateMenuPosition().Y, menuWidth, menuHeight)
         {
+            this.Config = Config;
             this.setUpPositions();
         }
 
@@ -65,12 +67,21 @@ namespace AutoConsume
             // set labels and checkboxes position
             this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth, 1, 1), healLabelText));
             this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth*2, 1, 1), buffLabelText));
-            this.CheckBoxes.Add(new ClickableTextureComponent("check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
-            this.CheckBoxes.Add(new ClickableTextureComponent("check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth*2, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
+            this.CheckBoxes.Add(new ClickableTextureComponent("autoheal-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
+            this.CheckBoxes.Add(new ClickableTextureComponent("autobuff-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth*2, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(227, 425, 9, 9), 3f));
         }
 
         private void handleButtonClick(string name)
         {
+            if (name == "autoheal-check-box")
+            {
+                Config.AutoHealKey = !Config.AutoHealKey;
+            }
+
+            if (name == "autobuff-check-box")
+            {
+                Config.AutoBuffKey = !Config.AutoBuffKey;
+            }
             Game1.playSound("coin");
         }
 
@@ -97,29 +108,41 @@ namespace AutoConsume
         {
             // draw menu box
             IClickableMenu.drawTextureBox(b, this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, Color.Beige);
-            //Game1.drawDialogueBox(this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, false, true);
             // draw exit button
             this.ExitButton.draw(b);
             // draw text
             foreach (ClickableComponent label in this.Labels)
             {
+                // 배경이 어두울 때 글씨가 보이도록 보라색 글씨도 같이 그린
                 Color color = Color.Violet;
                 Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color);
-            }
-  
-            foreach (ClickableComponent label in this.Labels)
-            {
-                string text = "";
-                Color color = Game1.textColor;
+                color = Game1.textColor;
                 Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color);
-                if (text.Length > 0)
-                    Utility.drawTextWithShadow(b, text, Game1.smallFont, new Vector2(label.bounds.X + Game1.tileSize / 3 - Game1.smallFont.MeasureString(text).X / 2f, label.bounds.Y + Game1.tileSize / 2), color);
             }
             
             // draw check boxes
             foreach (ClickableTextureComponent checkbox in this.CheckBoxes)
             {
-                checkbox.draw(b);
+                if (!Config.AutoHealKey && checkbox.name == "autoheal-check-box")
+                {
+                    checkbox.sourceRect = new Rectangle(227, 425, 9, 9);
+                    checkbox.draw(b);
+                }
+                if (Config.AutoHealKey && checkbox.name == "autoheal-check-box")
+                {
+                    checkbox.sourceRect = new Rectangle(236, 425, 9, 9);
+                    checkbox.draw(b);
+                }
+                if (!Config.AutoBuffKey && checkbox.name == "autobuff-check-box")
+                {
+                    checkbox.sourceRect = new Rectangle(227, 425, 9, 9);
+                    checkbox.draw(b);
+                }
+                if (Config.AutoBuffKey && checkbox.name == "autobuff-check-box")
+                {
+                    checkbox.sourceRect = new Rectangle(236, 425, 9, 9);
+                    checkbox.draw(b);
+                }
             }
 
             const string Cheese_ID = "424";
