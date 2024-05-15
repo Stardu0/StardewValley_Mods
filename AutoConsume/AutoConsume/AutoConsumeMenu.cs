@@ -20,8 +20,8 @@ namespace AutoConsume
         private Rectangle FullCheckBox = new Rectangle(236, 425, 9, 9);
         private const float ScaleFactor = 3f;
 
-        public static int menuWidth = (int)(Game1.uiViewport.Width/1.5);
-        public static int menuHeight = (int)(Game1.uiViewport.Height/1.5); 
+        private static int menuWidth = (int)(Game1.uiViewport.Width/1.5);
+        private static int menuHeight = (int)(Game1.uiViewport.Height/1.5); 
 
         // Public Method
         public AutoConsumeMenu(ModConfig Config)
@@ -128,27 +128,21 @@ namespace AutoConsume
             {
                 // 체크 박스의 이름을 확인
                 // 체크 박스의 boolean 값을 확인
-                if (!Config.AutoHealKey && checkbox.name == "autoheal-check-box")
-                {
-                    checkbox.sourceRect = EmptyCheckBox;
-                    checkbox.draw(b);
-                }
-                if (Config.AutoHealKey && checkbox.name == "autoheal-check-box")
-                {
-                    checkbox.sourceRect = FullCheckBox;
-                    checkbox.draw(b);
-                }
 
-                if (!Config.AutoBuffKey && checkbox.name == "autobuff-check-box")
+                switch (checkbox.name)
                 {
-                    checkbox.sourceRect = EmptyCheckBox;
-                    checkbox.draw(b);
+                    case "autoheal-check-box":
+                        if (Config.AutoHealKey) checkbox.sourceRect = FullCheckBox;
+                        else checkbox.sourceRect = EmptyCheckBox;
+                        break;
+
+                    case "autobuff-check-box":
+                        if (Config.AutoBuffKey) checkbox.sourceRect = FullCheckBox;
+                        else checkbox.sourceRect = EmptyCheckBox;
+                        break;
+
                 }
-                if (Config.AutoBuffKey && checkbox.name == "autobuff-check-box")
-                {
-                    checkbox.sourceRect = FullCheckBox;
-                    checkbox.draw(b);
-                }
+                checkbox.draw(b);     
             }
 
             const string Cheese_ID = "424";

@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "7x1o5CN/PH6Vpx7OZxHxiFtDeX6RmTEFh3mpFafdpNAKxnD43aauNKFalyAeQp58W9TlezsZFQM40JhJbvhGRg==",
+  "dgSpecHash": "rReifXotddxeAdaAcg6d4SQFVqeu4lFp/m0s0xG2hgIF4Bfw7rULpd+0vmahsntNNp3N+LJ/R/XJWcoZe3DcMw==",
   "success": true,
-  "projectFilePath": "/Users/ryujihyeun/Documents/GitHub/StardewValley_Mods/AutoConsume/AutoConsume/AutoConsume.csproj",
+  "projectFilePath": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\AutoConsume.csproj",
   "expectedPackageFiles": [
-    "/Users/ryujihyeun/.nuget/packages/pathoschild.stardew.modbuildconfig/4.1.1/pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512"
+    "C:\\Users\\minni\\.nuget\\packages\\pathoschild.stardew.modbuildconfig\\4.1.1\\pathoschild.stardew.modbuildconfig.4.1.1.nupkg.sha512",
+    "C:\\Users\\minni\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.28\\microsoft.windowsdesktop.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\minni\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.28\\microsoft.netcore.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\minni\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.28\\microsoft.aspnetcore.app.ref.6.0.28.nupkg.sha512"
   ],
   "logs": []
 }

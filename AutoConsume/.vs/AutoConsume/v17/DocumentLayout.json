@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{09C15C87-2AE6-4E87-849E-16223CB9592F}|AutoConsume\\AutoConsume.csproj|d:\\stardewmods\\stardewvalley_mods\\autoconsume\\autoconsume\\autoconsumemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09C15C87-2AE6-4E87-849E-16223CB9592F}|AutoConsume\\AutoConsume.csproj|solutionrelative:autoconsume\\autoconsumemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{09C15C87-2AE6-4E87-849E-16223CB9592F}|AutoConsume\\AutoConsume.csproj|d:\\stardewmods\\stardewvalley_mods\\autoconsume\\autoconsume\\modentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{09C15C87-2AE6-4E87-849E-16223CB9592F}|AutoConsume\\AutoConsume.csproj|solutionrelative:autoconsume\\modentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,12 +23,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AutoConsumeMenu.cs",
+              "DocumentMoniker": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\AutoConsumeMenu.cs",
+              "RelativeDocumentMoniker": "AutoConsume\\AutoConsumeMenu.cs",
+              "ToolTip": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\AutoConsumeMenu.cs",
+              "RelativeToolTip": "AutoConsume\\AutoConsumeMenu.cs",
+              "ViewState": "AQIAAH4AAAAAAAAAAAAAAJAAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T04:57:25.971Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ModEntry.cs",
               "DocumentMoniker": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\ModEntry.cs",
               "RelativeDocumentMoniker": "AutoConsume\\ModEntry.cs",
               "ToolTip": "D:\\StardewMods\\StardewValley_Mods\\AutoConsume\\AutoConsume\\ModEntry.cs",
               "RelativeToolTip": "AutoConsume\\ModEntry.cs",
-              "ViewState": "AQIAAGAAAAAAAAAAAAAowHEAAAABAAAA",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAowHEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-01T02:25:42.202Z",
               "EditorCaption": ""
