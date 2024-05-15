@@ -14,13 +14,21 @@ namespace AutoConsume
         // Fields
         private readonly List<ClickableComponent> Labels = new List<ClickableComponent>();
         private readonly List<ClickableTextureComponent> CheckBoxes = new List<ClickableTextureComponent>();
+        private readonly List<ClickableTextureComponent> Arrows = new List<ClickableTextureComponent>();
+        private readonly List<ClickableTextureComponent> ItemBoxes = new List<ClickableTextureComponent>();
+        private readonly List<ClickableTextureComponent> InfoBoxes = new List<ClickableTextureComponent>();
         private ClickableTextureComponent ExitButton;
         private ModConfig Config;
+        private Texture2D letterTexture;
         private Rectangle EmptyCheckBox = new Rectangle(227, 425, 9, 9);
         private Rectangle FullCheckBox = new Rectangle(236, 425, 9, 9);
+        private Rectangle RightArrow = new Rectangle(365, 494, 12, 12);
+        private Rectangle LeftArrow = new Rectangle(352, 494, 12, 12);
+        private Rectangle ItemBox = new Rectangle(293, 360, 24, 24);
+        private Rectangle InfoBox = new Rectangle(0, 0, 320, 180);
         private const float ScaleFactor = 3f;
 
-        private static int menuWidth = (int)(Game1.uiViewport.Width/1.5);
+        private static int menuWidth = (int)(Game1.uiViewport.Width/2.5);
         private static int menuHeight = (int)(Game1.uiViewport.Height/1.5); 
 
         // Public Method
@@ -28,6 +36,7 @@ namespace AutoConsume
             : base((int)getAppropriateMenuPosition().X, (int)getAppropriateMenuPosition().Y, menuWidth, menuHeight)
         {
             this.Config = Config;
+            letterTexture = Game1.temporaryContent.Load<Texture2D>("LooseSprites\\letterBG");
             this.setUpPositions();
         }
 
@@ -63,15 +72,36 @@ namespace AutoConsume
         {
             string healLabelText = "Auto Heal";
             string buffLabelText = "Auto Buff";
+            string healItemText = "Heal Item";
+            string buffItemText = "Buff Item";
+            int paddingSize = 30;
             // clear and initialized
             this.ExitButton = new ClickableTextureComponent("exit-button", new Rectangle(this.xPositionOnScreen + menuWidth, this.yPositionOnScreen, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(337, 493, 13, 13), 3f);
             this.Labels.Clear();
             this.CheckBoxes.Clear();
+            this.Arrows.Clear();
+            this.ItemBoxes.Clear();
             // set labels and checkboxes position
             this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth, 1, 1), healLabelText));
-            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth*2, 1, 1), buffLabelText));
-            this.CheckBoxes.Add(new ClickableTextureComponent("autoheal-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth, (int)(EmptyCheckBox.Width*ScaleFactor), (int)(EmptyCheckBox.Height*ScaleFactor)), "", null, Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
+            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth * 2, 1, 1), buffLabelText));
+            this.CheckBoxes.Add(new ClickableTextureComponent("autoheal-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth, (int)(EmptyCheckBox.Width * ScaleFactor), (int)(EmptyCheckBox.Height * ScaleFactor)), "", null, Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
             this.CheckBoxes.Add(new ClickableTextureComponent("autobuff-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth*2, (int)(EmptyCheckBox.Width * ScaleFactor), (int)(EmptyCheckBox.Height * ScaleFactor)), "", null, Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
+            // set arrows and itemboxes position and labels position
+            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth * 4, 1, 1), healItemText));
+            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth * 8, 1, 1), buffItemText));
+
+            this.Arrows.Add(new ClickableTextureComponent("heal-item-left-arrow", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth * 5 + ItemBox.Height/4, (int)(LeftArrow.Height * ScaleFactor),(int)(LeftArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, LeftArrow, ScaleFactor));
+            this.Arrows.Add(new ClickableTextureComponent("heal-item-right-arrow", new Rectangle(this.xPositionOnScreen + borderWidth + ItemBox.Width + LeftArrow.Width + paddingSize * 2, this.yPositionOnScreen + borderWidth * 5 + ItemBox.Height/4, (int)(RightArrow.Width * ScaleFactor), (int)(RightArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, RightArrow, ScaleFactor));
+            this.ItemBoxes.Add(new ClickableTextureComponent("heal-item-box", new Rectangle(this.xPositionOnScreen + borderWidth + LeftArrow.Width + paddingSize , this.yPositionOnScreen + borderWidth * 5, (int)(ItemBox.Width * ScaleFactor), (int)(ItemBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, ItemBox, 2f));
+
+            this.Arrows.Add(new ClickableTextureComponent("buff-item-left-arrow", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth * 9 + ItemBox.Height / 4, (int)(LeftArrow.Height * ScaleFactor), (int)(LeftArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, LeftArrow, ScaleFactor));
+            this.Arrows.Add(new ClickableTextureComponent("buff-item-right-arrow", new Rectangle(this.xPositionOnScreen + borderWidth + ItemBox.Width + LeftArrow.Width + paddingSize * 2, this.yPositionOnScreen + borderWidth * 9 + ItemBox.Height / 4, (int)(RightArrow.Width * ScaleFactor), (int)(RightArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, RightArrow, ScaleFactor));
+            this.ItemBoxes.Add(new ClickableTextureComponent("buff-item-box", new Rectangle(this.xPositionOnScreen + borderWidth + LeftArrow.Width + paddingSize, this.yPositionOnScreen + borderWidth * 9, (int)(ItemBox.Width * ScaleFactor), (int)(ItemBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, ItemBox, 2f));
+            // set Info box position
+            this.InfoBoxes.Add(new ClickableTextureComponent("heal-info-box", new Rectangle(this.xPositionOnScreen + borderWidth* 5, this.yPositionOnScreen + borderWidth * 4, 1, 1), "", "", letterTexture, InfoBox, 0.7f));
+            this.InfoBoxes.Add(new ClickableTextureComponent("buff-info-box", new Rectangle(this.xPositionOnScreen + borderWidth * 5, this.yPositionOnScreen + borderWidth * 8, 1, 1), "", "", letterTexture, InfoBox, 0.7f));
+
+            // Game1.cropSpriteSheet
         }
 
         private void handleButtonClick(string name)
@@ -120,7 +150,7 @@ namespace AutoConsume
             // draw text
             foreach (ClickableComponent label in this.Labels)
             {
-                // 배경이 어두울 때 글씨가 보이도록 보라색 글씨도 같이 그린
+                // draw in a violet color so that the text can be seen when the background is dark
                 Color color = Color.Violet;
                 Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color);
                 color = Game1.textColor;
@@ -144,6 +174,22 @@ namespace AutoConsume
 
                 }
                 checkbox.draw(b);     
+            }
+
+            // draw item box and arrows
+            foreach (ClickableTextureComponent arrow in this.Arrows)
+            {
+                arrow.draw(b);
+            }
+            foreach (ClickableTextureComponent itembox in this.ItemBoxes)
+            {
+                itembox.draw(b);
+            }
+
+            // draw info box
+            foreach (ClickableTextureComponent infobox in this.InfoBoxes)
+            {
+                infobox.draw(b);
             }
 
             const string Cheese_ID = "424";

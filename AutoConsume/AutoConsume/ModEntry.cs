@@ -21,7 +21,6 @@ namespace AutoConsume
         public bool AutoBuffKey { get; set; }
     }
 
-
     /// <summary>The mod entry point.</summary>
     internal sealed class ModEntry : Mod
     {
