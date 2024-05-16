@@ -33,7 +33,7 @@ namespace AutoConsume
         private const float ScaleFactor = 4f;
 
         private static int menuWidth = (int)(Game1.uiViewport.Width/2.5);
-        private static int menuHeight = (int)(Game1.uiViewport.Height/1.5); 
+        private static int menuHeight = (int)(Game1.uiViewport.Height/1.4); 
 
         // Public Method
         public AutoConsumeMenu(ModConfig Config, List<Item> InventoryItems)
@@ -87,33 +87,40 @@ namespace AutoConsume
             string buffLabelText = "Auto Buff";
             string healItemText = "Heal Item";
             string buffItemText = "Buff Item";
-            int paddingSize = 30;
+            int paddingSize = 20;
+            int spriteSize = 9 * (int)ScaleFactor + paddingSize;
+            int itemBoxSize = ItemBox.Width * (int)(ScaleFactor * 0.9f);
+            int arrowSize = RightArrow.Width * (int)ScaleFactor;
+            int recX = this.xPositionOnScreen + borderWidth;
+            int recY = this.yPositionOnScreen + borderWidth;
+            
             // clear and initialized
-            this.ExitButton = new ClickableTextureComponent("exit-button", new Rectangle(this.xPositionOnScreen + menuWidth, this.yPositionOnScreen, Game1.tileSize, Game1.tileSize), "", null, Game1.mouseCursors, new Rectangle(337, 493, 13, 13), 3f);
+            this.ExitButton = new ClickableTextureComponent("exit-button", new Rectangle(this.xPositionOnScreen + menuWidth, this.yPositionOnScreen, Game1.tileSize, Game1.tileSize), "", "", Game1.mouseCursors, new Rectangle(337, 493, 13, 13), ScaleFactor);
             this.Labels.Clear();
             this.CheckBoxes.Clear();
             this.Arrows.Clear();
             this.ItemBoxes.Clear();
             this.InfoBoxes.Clear();
             // set labels and checkboxes position
-            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth, 1, 1), healLabelText));
-            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth + 45, this.yPositionOnScreen + borderWidth * 2, 1, 1), buffLabelText));
-            this.CheckBoxes.Add(new ClickableTextureComponent("autoheal-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth, (int)(EmptyCheckBox.Width * ScaleFactor), (int)(EmptyCheckBox.Height * ScaleFactor)), "", null, Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
-            this.CheckBoxes.Add(new ClickableTextureComponent("autobuff-check-box", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth*2, (int)(EmptyCheckBox.Width * ScaleFactor), (int)(EmptyCheckBox.Height * ScaleFactor)), "", null, Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
+
+            this.CheckBoxes.Add(new ClickableTextureComponent("autoheal-check-box", new Rectangle(recX, recY, (int)(EmptyCheckBox.Width * ScaleFactor), (int)(EmptyCheckBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
+            this.CheckBoxes.Add(new ClickableTextureComponent("autobuff-check-box", new Rectangle(recX, recY + spriteSize, (int)(EmptyCheckBox.Width * ScaleFactor), (int)(EmptyCheckBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
+            this.Labels.Add(new ClickableComponent(new Rectangle(recX + spriteSize, recY, 1, 1), healLabelText));
+            this.Labels.Add(new ClickableComponent(new Rectangle(recX + spriteSize, recY + spriteSize, 1, 1), buffLabelText));
             // set arrows and itemboxes position and labels position
-            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth * 4, 1, 1), healItemText));
-            this.Labels.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth * 8, 1, 1), buffItemText));
+            this.Labels.Add(new ClickableComponent(new Rectangle(recX, recY + spriteSize * 2, 1, 1), healItemText));
+            this.Labels.Add(new ClickableComponent(new Rectangle(recX, recY + spriteSize * 5, 1, 1), buffItemText));
 
-            this.Arrows.Add(new ClickableTextureComponent("heal-item-left-arrow", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth * 5 + ItemBox.Height/4, (int)(LeftArrow.Height * ScaleFactor),(int)(LeftArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, LeftArrow, ScaleFactor));
-            this.Arrows.Add(new ClickableTextureComponent("heal-item-right-arrow", new Rectangle(this.xPositionOnScreen + borderWidth + ItemBox.Width + LeftArrow.Width + paddingSize * 2, this.yPositionOnScreen + borderWidth * 5 + ItemBox.Height/4, (int)(RightArrow.Width * ScaleFactor), (int)(RightArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, RightArrow, ScaleFactor));
-            this.ItemBoxes.Add(new ClickableTextureComponent("heal-item-box", new Rectangle(this.xPositionOnScreen + borderWidth + LeftArrow.Width + paddingSize , this.yPositionOnScreen + borderWidth * 5, (int)(ItemBox.Width * ScaleFactor), (int)(ItemBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, ItemBox, ScaleFactor * 0.9f));
+            this.Arrows.Add(new ClickableTextureComponent("heal-item-left-arrow", new Rectangle(recX, recY + spriteSize * 3 + itemBoxSize/4, (int)(LeftArrow.Height * ScaleFactor),(int)(LeftArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, LeftArrow, ScaleFactor));
+            this.Arrows.Add(new ClickableTextureComponent("heal-item-right-arrow", new Rectangle(recX + arrowSize + paddingSize * 2 + (int)(ItemBox.Width * ScaleFactor * 0.9f), recY + spriteSize * 3 + itemBoxSize / 4, (int)(RightArrow.Width * ScaleFactor), (int)(RightArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, RightArrow, ScaleFactor));
+            this.ItemBoxes.Add(new ClickableTextureComponent("heal-item-box", new Rectangle(recX + arrowSize + paddingSize, recY + spriteSize * 3, (int)(ItemBox.Width * ScaleFactor), (int)(ItemBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, ItemBox, ScaleFactor * 0.9f));
 
-            this.Arrows.Add(new ClickableTextureComponent("buff-item-left-arrow", new Rectangle(this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth * 9 + ItemBox.Height / 4, (int)(LeftArrow.Height * ScaleFactor), (int)(LeftArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, LeftArrow, ScaleFactor));
-            this.Arrows.Add(new ClickableTextureComponent("buff-item-right-arrow", new Rectangle(this.xPositionOnScreen + borderWidth + ItemBox.Width + LeftArrow.Width + paddingSize * 2, this.yPositionOnScreen + borderWidth * 9 + ItemBox.Height / 4, (int)(RightArrow.Width * ScaleFactor), (int)(RightArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, RightArrow, ScaleFactor));
-            this.ItemBoxes.Add(new ClickableTextureComponent("buff-item-box", new Rectangle(this.xPositionOnScreen + borderWidth + LeftArrow.Width + paddingSize, this.yPositionOnScreen + borderWidth * 9, (int)(ItemBox.Width * ScaleFactor), (int)(ItemBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, ItemBox, ScaleFactor * 0.9f));
+            this.Arrows.Add(new ClickableTextureComponent("buff-item-left-arrow", new Rectangle(recX, recY + spriteSize * 6 + itemBoxSize / 4, (int)(LeftArrow.Height * ScaleFactor), (int)(LeftArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, LeftArrow, ScaleFactor));
+            this.Arrows.Add(new ClickableTextureComponent("buff-item-right-arrow", new Rectangle(recX + arrowSize + paddingSize * 2 + (int)(ItemBox.Width * ScaleFactor * 0.9f), recY + spriteSize * 6 + itemBoxSize / 4, (int)(RightArrow.Width * ScaleFactor), (int)(RightArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, RightArrow, ScaleFactor));
+            this.ItemBoxes.Add(new ClickableTextureComponent("buff-item-box", new Rectangle(recX + arrowSize + paddingSize, recY + spriteSize * 6, (int)(ItemBox.Width * ScaleFactor), (int)(ItemBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, ItemBox, ScaleFactor * 0.9f));
             // set Info box position
-            this.InfoBoxes.Add(new ClickableTextureComponent("heal-info-box", new Rectangle(this.xPositionOnScreen + borderWidth* 5, this.yPositionOnScreen + borderWidth * 4, 1, 1), "", "", letterTexture, InfoBox, 1f));
-            this.InfoBoxes.Add(new ClickableTextureComponent("buff-info-box", new Rectangle(this.xPositionOnScreen + borderWidth * 5, this.yPositionOnScreen + borderWidth * 8, 1, 1), "", "", letterTexture, InfoBox, 1f));
+            this.InfoBoxes.Add(new ClickableTextureComponent("heal-info-box", new Rectangle(recX* 5, recY * 4, 1, 1), "", "", letterTexture, InfoBox, 1f));
+            this.InfoBoxes.Add(new ClickableTextureComponent("buff-info-box", new Rectangle(recX * 5, recY * 8, 1, 1), "", "", letterTexture, InfoBox, 1f));
 
             // Game1.cropSpriteSheet
         }
@@ -214,28 +221,30 @@ namespace AutoConsume
             }
 
             // draw item box and arrows
-            foreach (ClickableTextureComponent arrow in this.Arrows)
-            {
-                arrow.draw(b);
-            }
             foreach (ClickableTextureComponent itembox in this.ItemBoxes)
             {
                 itembox.draw(b);
                 switch (itembox.name)
                 {
                     case "heal-item-box":
-                        InventoryItems[healItemIdx].drawInMenu(b, new Vector2(itembox.bounds.X, itembox.bounds.Y), 1f);
+                        if (InventoryItems.Count == 0) break;
+                        InventoryItems[healItemIdx].drawInMenu(b, new Vector2(itembox.bounds.X + 10, itembox.bounds.Y + 10), 1f);
                         break;
                     case "buff-item-box":
-                        InventoryBuffItems[buffItemIdx].drawInMenu(b, new Vector2(itembox.bounds.X, itembox.bounds.Y), 1f);
+                        if (InventoryBuffItems.Count == 0) break;
+                        InventoryBuffItems[buffItemIdx].drawInMenu(b, new Vector2(itembox.bounds.X + 10, itembox.bounds.Y + 10), 1f);
                         break;
                 }
+            }
+            foreach (ClickableTextureComponent arrow in this.Arrows)
+            {
+                arrow.draw(b);
             }
 
             // draw info box
             foreach (ClickableTextureComponent infobox in this.InfoBoxes)
             {
-                infobox.draw(b);
+                //infobox.draw(b);
             }
 
             // draw cursor
