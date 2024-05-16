@@ -28,6 +28,7 @@ namespace AutoConsume
         bool ShouldDrink = false;
 
         private ModConfig Config;
+        private List<Item> InventoryItems = new List<Item>();
 
         /*********
         ** Public methods
@@ -56,21 +57,42 @@ namespace AutoConsume
         {
             if (!Game1.player.canMove) return;
 
+            
+
             if (Config.OpenMenuKey.JustPressed())
             {
                 this.Monitor.Log("pressed O.", LogLevel.Debug);
+                // Get Inventroy Items
+                GetInventoryItems();
 
-                // if  Auto Consume Menu is Open then close
-                if(Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu)
+                Monitor.Log($"{InventoryItems.Count}", LogLevel.Debug);
+                foreach (Item curitem in InventoryItems)
+                {
+                    Monitor.Log($"{curitem.Name} : {curitem.Stack}", LogLevel.Debug);
+                }
+
+                // if0 Auto Consume Menu is Open then close
+                if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu)
                 {
                     autoConsumeMenu.exitThisMenu();
                 }
-                else Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu(Config);
+                else Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu(Config, InventoryItems);
             }
         }
 
-        
-        
+        private void GetInventoryItems()
+        {
+            if (!Context.IsWorldReady) return;
+            InventoryItems.Clear();
+
+            foreach (Item curItem in Game1.player.Items)
+            {
+                if (curItem == null) continue;
+                StardewValley.Object o = new StardewValley.Object(curItem.ItemId, 1);
+                if (o.Edibility != -300) InventoryItems.Add(curItem);
+            }
+        }
+
         private void OnOneSecondUpdateTicked(object sender, EventArgs e)
         {
             // ignore if player hasn't loaded a save yet
