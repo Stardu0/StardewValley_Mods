@@ -19,6 +19,10 @@ namespace AutoConsume
         public KeybindList OpenMenuKey { get; set; } = KeybindList.Parse("O");
         public bool AutoHealKey { get; set; }
         public bool AutoBuffKey { get; set; }
+        public string HealItemID { get; set; } = "424";
+        public int HealItemQuality { get; set; }
+        public string BuffItemID { get; set; } = "253";
+        public int BuffItemQuality { get; set; }
     }
 
     /// <summary>The mod entry point.</summary>
@@ -65,7 +69,8 @@ namespace AutoConsume
                 // Get Inventroy Items
                 GetInventoryItems();
 
-                Monitor.Log($"{InventoryItems.Count}", LogLevel.Debug);
+                Monitor.Log($"{Config.HealItemID} : {Config.HealItemQuality}", LogLevel.Debug);
+                Monitor.Log($"{Config.BuffItemID} : {Config.BuffItemQuality}", LogLevel.Debug);
                 foreach (Item curitem in InventoryItems)
                 {
                     Monitor.Log($"{curitem.Name} : {curitem.Stack}", LogLevel.Debug);

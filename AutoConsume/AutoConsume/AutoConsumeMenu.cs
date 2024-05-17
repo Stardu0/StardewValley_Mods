@@ -48,6 +48,8 @@ namespace AutoConsume
                     InventoryBuffItems.Add(buffItem);
             }
 
+            setIndex();
+
             letterTexture = Game1.temporaryContent.Load<Texture2D>("LooseSprites\\letterBG");
             // setup position
             this.setUpPositions();
@@ -81,6 +83,23 @@ namespace AutoConsume
         }
 
         // private method
+        private void setIndex()
+        {
+            int tmpidx = 0;
+            foreach(Item curitem in InventoryItems)
+            {
+                if (curitem.ItemId == Config.HealItemID) healItemIdx = tmpidx;
+                tmpidx++;
+            }
+            tmpidx = 0;
+            foreach(Item curitem in InventoryBuffItems)
+            {
+                if (curitem.ItemId == Config.BuffItemID) buffItemIdx = tmpidx;
+                tmpidx++;
+            }
+        }
+
+
         private void setUpPositions()
         {
             string healLabelText = "Auto Heal";
@@ -153,6 +172,18 @@ namespace AutoConsume
                     if (buffItemIdx + 1 < InventoryBuffItems.Count) buffItemIdx++;
                     break;
 
+            }
+
+            // set Config data: HealItemId, Quality, BuffItemID etc
+            if(InventoryItems.Count != 0)
+            {
+                Config.HealItemID = InventoryItems[healItemIdx].ItemId;
+                Config.HealItemQuality = InventoryItems[healItemIdx].Quality;
+            }
+            if(InventoryBuffItems.Count != 0)
+            {
+                Config.BuffItemID = InventoryBuffItems[buffItemIdx].ItemId;
+                Config.BuffItemQuality = InventoryBuffItems[buffItemIdx].Quality;
             }
 
             Game1.playSound("Ostrich");
