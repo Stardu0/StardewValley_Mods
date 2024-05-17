@@ -43,7 +43,6 @@ namespace AutoConsume
         {
             this.Config = this.Helper.ReadConfig<ModConfig>();
 
-            helper.Events.GameLoop.DayStarted += this.OnDayStarted;
             helper.Events.GameLoop.UpdateTicked += this.OnUpdateTicked;
             helper.Events.GameLoop.OneSecondUpdateTicked += OnOneSecondUpdateTicked;
             helper.Events.Input.ButtonsChanged += this.OnButtonChanged;
@@ -69,8 +68,6 @@ namespace AutoConsume
                 // Get Inventroy Items
                 GetInventoryItems();
 
-                Monitor.Log($"{Config.HealItemID} : {Config.HealItemQuality}", LogLevel.Debug);
-                Monitor.Log($"{Config.BuffItemID} : {Config.BuffItemQuality}", LogLevel.Debug);
                 foreach (Item curitem in InventoryItems)
                 {
                     Monitor.Log($"{curitem.Name} : {curitem.Stack}", LogLevel.Debug);
@@ -134,12 +131,6 @@ namespace AutoConsume
 
         }
 
-        private void OnDayStarted(object sender, EventArgs e)
-        {
-            // drink Triple Shot Espresso when the player wakes up
-            // ShouldBuff = true;
-        }
-
         private void GoHeal()
         {
             // set variables
@@ -186,19 +177,5 @@ namespace AutoConsume
                 Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu(Config, InventoryItems);
             }
         }
-
-
-        private bool HasItem(StardewValley.Object itemObject)
-        {
-            if (Game1.player.getIndexOfInventoryItem(itemObject) >= 0) return true;
-            return false;
-        }
-
-        private void ConsumeItemInInventory(StardewValley.Object itemObject)
-        {
-            Game1.player.eatObject(itemObject);
-            Game1.player.Items.ReduceId(itemObject.itemId, 1);
-        }
-
     }
 }

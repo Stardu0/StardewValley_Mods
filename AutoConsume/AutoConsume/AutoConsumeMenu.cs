@@ -16,12 +16,10 @@ namespace AutoConsume
         private readonly List<ClickableTextureComponent> CheckBoxes = new List<ClickableTextureComponent>();
         private readonly List<ClickableTextureComponent> Arrows = new List<ClickableTextureComponent>();
         private readonly List<ClickableTextureComponent> ItemBoxes = new List<ClickableTextureComponent>();
-        private readonly List<ClickableTextureComponent> InfoBoxes = new List<ClickableTextureComponent>();
         private ClickableTextureComponent ExitButton;
         private ModConfig Config;
         private readonly List<Item> InventoryItems;
         private readonly List<Item> InventoryBuffItems = new List<Item>();
-        private Texture2D letterTexture;
         private Rectangle EmptyCheckBox = new Rectangle(227, 425, 9, 9);
         private Rectangle FullCheckBox = new Rectangle(236, 425, 9, 9);
         private Rectangle RightArrow = new Rectangle(365, 494, 12, 12);
@@ -50,7 +48,6 @@ namespace AutoConsume
 
             setIndex();
 
-            letterTexture = Game1.temporaryContent.Load<Texture2D>("LooseSprites\\letterBG");
             // setup position
             this.setUpPositions();
         }
@@ -144,7 +141,6 @@ namespace AutoConsume
             this.CheckBoxes.Clear();
             this.Arrows.Clear();
             this.ItemBoxes.Clear();
-            this.InfoBoxes.Clear();
             // set labels and checkboxes position
 
             this.CheckBoxes.Add(new ClickableTextureComponent("autoheal-check-box", new Rectangle(recX, recY, (int)(EmptyCheckBox.Width * ScaleFactor), (int)(EmptyCheckBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, EmptyCheckBox, ScaleFactor));
@@ -163,10 +159,7 @@ namespace AutoConsume
             this.Arrows.Add(new ClickableTextureComponent("buff-item-right-arrow", new Rectangle(recX + arrowSize + paddingSize * 2 + (int)(ItemBox.Width * ScaleFactor * 0.9f), recY + spriteSize * 6 + itemBoxSize / 4, (int)(RightArrow.Width * ScaleFactor), (int)(RightArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, RightArrow, ScaleFactor));
             this.ItemBoxes.Add(new ClickableTextureComponent("buff-item-box", new Rectangle(recX + arrowSize + paddingSize, recY + spriteSize * 6, (int)(ItemBox.Width * ScaleFactor), (int)(ItemBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, ItemBox, ScaleFactor * 0.9f));
             // set Info box position
-            this.InfoBoxes.Add(new ClickableTextureComponent("heal-info-box", new Rectangle(recX* 5, recY * 4, 1, 1), "", "", letterTexture, InfoBox, 1f));
-            this.InfoBoxes.Add(new ClickableTextureComponent("buff-info-box", new Rectangle(recX * 5, recY * 8, 1, 1), "", "", letterTexture, InfoBox, 1f));
 
-            // Game1.cropSpriteSheet
         }
 
         private void handleButtonClick(string name)
@@ -297,11 +290,7 @@ namespace AutoConsume
                 arrow.draw(b);
             }
 
-            // draw info box
-            foreach (ClickableTextureComponent infobox in this.InfoBoxes)
-            {
-                //infobox.draw(b);
-            }
+            // draw infomation
 
             // draw cursor
             this.drawMouse(b);
