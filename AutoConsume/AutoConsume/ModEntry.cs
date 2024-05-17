@@ -28,8 +28,8 @@ namespace AutoConsume
     /// <summary>The mod entry point.</summary>
     internal sealed class ModEntry : Mod
     {
-        bool ShouldEat = false;
-        bool ShouldDrink = false;
+        bool ShouldHeal = false;
+        bool ShouldBuff = false;
 
         private ModConfig Config;
         private List<Item> InventoryItems = new List<Item>();
@@ -105,13 +105,13 @@ namespace AutoConsume
             if (!Config.AutoBuffKey) return;
             
             // check Buff
-            if (!Game1.player.hasBuff("drink") && Game1.player.canMove && Game1.timeOfDay < 2400 && !Game1.IsFading()) ShouldDrink = true;
-            else ShouldDrink = false;
+            if (!Game1.player.hasBuff("drink") && Game1.player.canMove && Game1.timeOfDay < 2400 && !Game1.IsFading()) ShouldBuff = true;
+            else ShouldBuff = false;
 
-            if (ShouldDrink)
+            if (ShouldBuff)
             {
                 if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
-                DrinkTrippleShotEspresso();
+                GoBuff();
             }
 
         }
@@ -123,13 +123,13 @@ namespace AutoConsume
             if (!Config.AutoHealKey) return;
 
             // check health
-            if (Game1.player.health <= Game1.player.maxHealth * 0.3 && Game1.player.canMove && !Game1.IsFading()) ShouldEat = true;
-            else ShouldEat = false;
+            if (Game1.player.health <= Game1.player.maxHealth * 0.3 && Game1.player.canMove && !Game1.IsFading()) ShouldHeal = true;
+            else ShouldHeal = false;
 
-            if (ShouldEat)
+            if (ShouldHeal)
             {
                 if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
-                EatCheese();
+                GoHeal();
             }
 
         }
@@ -137,39 +137,41 @@ namespace AutoConsume
         private void OnDayStarted(object sender, EventArgs e)
         {
             // drink Triple Shot Espresso when the player wakes up
-            // ShouldDrink = true;
+            // ShouldBuff = true;
         }
 
-        private void EatCheese()
+        private void GoHeal()
         {
             // set variables
-            const string Cheese_ID = "424";
-            Item cheese = new StardewValley.Object(Cheese_ID, 1, false, -1, 2);
-            StardewValley.Object cheeseObj = new StardewValley.Object(Cheese_ID, 1, false, -1, 2);
-            // find cheese 
-            int idx = Game1.player.getIndexOfInventoryItem(cheese);
+            string HealID = Config.HealItemID;
+            int HealQuality = Config.HealItemQuality;
+            StardewValley.Object HealObj = new StardewValley.Object(HealID, 1, false, -1, HealQuality);
+            Item HealItem = HealObj;
+            // find HealItem
+            int HealIdx = Game1.player.getIndexOfInventoryItem(HealObj);
             // check inventory
-            if (idx >= 0)
+            if (HealIdx >= 0)
             {
-                Game1.player.eatObject(cheeseObj);
-                Game1.player.Items.ReduceId(Cheese_ID, 1);
+                Game1.player.eatObject(HealObj);
+                Game1.player.Items.ReduceId(HealID, 1);
             }
         }
         
-        private void DrinkTrippleShotEspresso()
+        private void GoBuff()
         {
             // set variable
-            const string TSE_ID = "253"; 
-            StardewValley.Object TSEObj = new StardewValley.Object(TSE_ID, 1);
-            Item TSE = TSEObj;
-            // find TSE
-            int idx = Game1.player.getIndexOfInventoryItem(TSEObj);
+            string BuffID = Config.BuffItemID;
+            int BuffQuality = Config.BuffItemQuality;
+            StardewValley.Object BuffObj = new StardewValley.Object(BuffID, 1, false, -1, BuffQuality);
+            Item BuffItem = BuffObj;
+            // find BuffItem
+            int BuffIdx = Game1.player.getIndexOfInventoryItem(BuffObj);
             // check inventory
-            if (idx >= 0)
+            if (BuffIdx >= 0)
             {
-                Game1.player.eatObject(TSEObj);
-                Game1.player.removeFirstOfThisItemFromInventory(TSE_ID);
-                //Game1.player.Items.ReduceId(TSE_ID, 1);
+                Game1.player.eatObject(BuffObj);
+                Game1.player.removeFirstOfThisItemFromInventory(BuffID);
+                //Game1.player.Items.ReduceId(BuffID, 1);
             }
         }
 
