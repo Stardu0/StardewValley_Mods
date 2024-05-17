@@ -105,7 +105,7 @@ namespace AutoConsume
             if (!Config.AutoBuffKey) return;
             
             // check Buff
-            if (!Game1.player.hasBuff("drink") && Game1.player.canMove && Game1.timeOfDay < 2400 && !Game1.IsFading()) ShouldBuff = true;
+            if (!Game1.player.hasBuff("drink") && !Game1.player.hasBuff("food") && Game1.player.canMove && Game1.timeOfDay < 2400 && !Game1.IsFading()) ShouldBuff = true;
             else ShouldBuff = false;
 
             if (ShouldBuff)
@@ -170,8 +170,8 @@ namespace AutoConsume
             if (BuffIdx >= 0)
             {
                 Game1.player.eatObject(BuffObj);
-                Game1.player.removeFirstOfThisItemFromInventory(BuffID);
-                //Game1.player.Items.ReduceId(BuffID, 1);
+                //Game1.player.removeFirstOfThisItemFromInventory(BuffID);
+                Game1.player.Items.ReduceId(BuffID, 1);
             }
         }
 
