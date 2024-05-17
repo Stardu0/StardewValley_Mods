@@ -86,16 +86,41 @@ namespace AutoConsume
         private void setIndex()
         {
             int tmpidx = 0;
+            bool finditem = false;
             foreach(Item curitem in InventoryItems)
             {
-                if (curitem.ItemId == Config.HealItemID) healItemIdx = tmpidx;
+                if (curitem.ItemId == Config.HealItemID)
+                {
+                    healItemIdx = tmpidx;
+                    finditem = true;
+                }
                 tmpidx++;
             }
+            if (!finditem)
+            {
+                healItemIdx = 0;
+                Config.HealItemID = InventoryItems[healItemIdx].ItemId;
+                Config.HealItemQuality = InventoryItems[healItemIdx].Quality;
+            }
+
+            
             tmpidx = 0;
+            finditem = false;
             foreach(Item curitem in InventoryBuffItems)
             {
-                if (curitem.ItemId == Config.BuffItemID) buffItemIdx = tmpidx;
+                if (curitem.ItemId == Config.BuffItemID)
+                {
+                    buffItemIdx = tmpidx;
+                    finditem = true;
+                }
                 tmpidx++;
+            }
+
+            if (!finditem)
+            {
+                buffItemIdx = 0;
+                Config.BuffItemID = InventoryBuffItems[buffItemIdx].ItemId;
+                Config.BuffItemQuality = InventoryBuffItems[buffItemIdx].Quality;
             }
         }
 

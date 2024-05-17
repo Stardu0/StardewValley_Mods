@@ -76,7 +76,7 @@ namespace AutoConsume
                     Monitor.Log($"{curitem.Name} : {curitem.Stack}", LogLevel.Debug);
                 }
 
-                // if0 Auto Consume Menu is Open then close
+                // if Auto Consume Menu is Open then close
                 if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu)
                 {
                     autoConsumeMenu.exitThisMenu();
@@ -94,7 +94,7 @@ namespace AutoConsume
             {
                 if (curItem == null) continue;
                 StardewValley.Object o = new StardewValley.Object(curItem.ItemId, 1);
-                if (o.Edibility != -300) InventoryItems.Add(curItem);
+                if (o.Edibility > 0) InventoryItems.Add(curItem);
             }
         }
 
@@ -155,6 +155,12 @@ namespace AutoConsume
                 Game1.player.eatObject(HealObj);
                 Game1.player.Items.ReduceId(HealID, 1);
             }
+            else
+            {
+                // open menu
+                GetInventoryItems();
+                Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu(Config, InventoryItems);
+            }
         }
         
         private void GoBuff()
@@ -172,6 +178,12 @@ namespace AutoConsume
                 Game1.player.eatObject(BuffObj);
                 //Game1.player.removeFirstOfThisItemFromInventory(BuffID);
                 Game1.player.Items.ReduceId(BuffID, 1);
+            }
+            else
+            {
+                // open menu
+                GetInventoryItems();
+                Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu(Config, InventoryItems);
             }
         }
 
