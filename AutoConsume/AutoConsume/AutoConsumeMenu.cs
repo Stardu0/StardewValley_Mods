@@ -19,6 +19,7 @@ namespace AutoConsume
         private readonly List<ClickableTextureComponent> HealItemInfoIcons = new List<ClickableTextureComponent>();
         private readonly List<ClickableTextureComponent> BuffItemInfoIcons = new List<ClickableTextureComponent>();
         private readonly List<ClickableComponent> HealInfoTexts = new List<ClickableComponent>();
+        private readonly List<ClickableComponent> BuffInfoTexts = new List<ClickableComponent>();
         private ClickableTextureComponent ExitButton;
         private ModConfig Config;
         private readonly List<Item> InventoryItems;
@@ -299,6 +300,17 @@ namespace AutoConsume
                     case "buff-item-box":
                         if (InventoryBuffItems.Count == 0) break;
                         InventoryBuffItems[buffItemIdx].drawInMenu(b, new Vector2(itembox.bounds.X + 10, itembox.bounds.Y + 10), 1f);
+                        // get buff information
+
+                        int tmpy = 1;
+                        foreach (Buff curbuff in InventoryBuffItems[buffItemIdx].GetFoodOrDrinkBuffs())
+                        {
+                            //BuffItemInfoIcons.Add(new ClickableTextureComponent("buff", new Rectangle(this.xPositionOnScreen, this.yPositionOnScreen, 64, 64), "", "", curbuff.iconTexture, Game1.getSourceRectForStandardTileSheet(curbuff.iconTexture, curbuff.iconSheetIndex), IconScaleFactor));
+                            BuffInfoTexts.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen, this.yPositionOnScreen * tmpy, 1, 1), "test" + curbuff.effects.LuckLevel.ToString()));
+                            tmpy++;
+                        }
+
+
                         break;
                 }
             }
@@ -308,11 +320,20 @@ namespace AutoConsume
             }
 
             // draw infomation
+            /*
             foreach (ClickableTextureComponent healIcon in this.HealItemInfoIcons)
             {
                 healIcon.draw(b);
             }
-
+            foreach (ClickableTextureComponent buffIcon in this.BuffItemInfoIcons)
+            {
+                buffIcon.draw(b);
+            }
+            foreach (ClickableComponent buffInfo in this.BuffInfoTexts)
+            {
+                Utility.drawTextWithShadow(b, buffInfo.name, Game1.smallFont, new Vector2(buffInfo.bounds.X, buffInfo.bounds.Y), Game1.textColor, 1.5f);
+            }
+            */
             // draw cursor
             this.drawMouse(b);
         }
