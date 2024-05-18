@@ -19,9 +19,9 @@ namespace AutoConsume
         public KeybindList OpenMenuKey { get; set; } = KeybindList.Parse("O");
         public bool AutoHealKey { get; set; }
         public bool AutoBuffKey { get; set; }
-        public string HealItemID { get; set; } = "424";
+        public string HealItemID { get; set; } = "424"; // cheese item id
         public int HealItemQuality { get; set; }
-        public string BuffItemID { get; set; } = "253";
+        public string BuffItemID { get; set; } = "253"; // Triple shot espresso item id
         public int BuffItemQuality { get; set; }
     }
 
@@ -60,18 +60,10 @@ namespace AutoConsume
         {
             if (!Game1.player.canMove) return;
 
-            
-
             if (Config.OpenMenuKey.JustPressed())
             {
-                this.Monitor.Log("pressed O.", LogLevel.Debug);
                 // Get Inventroy Items
                 GetInventoryItems();
-
-                foreach (Item curitem in InventoryItems)
-                {
-                    Monitor.Log($"{curitem.Name} : {curitem.Stack}", LogLevel.Debug);
-                }
 
                 // if Auto Consume Menu is Open then close
                 if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu)
@@ -84,9 +76,11 @@ namespace AutoConsume
 
         private void GetInventoryItems()
         {
+            // ignore if player hasn't loaded a save yet
             if (!Context.IsWorldReady) return;
+            // clear list
             InventoryItems.Clear();
-
+            // get inventory items that can consume
             foreach (Item curItem in Game1.player.Items)
             {
                 if (curItem == null) continue;
@@ -148,7 +142,7 @@ namespace AutoConsume
             }
             else
             {
-                // open menu
+                // If there are no available items in the inventory, then open the menu
                 GetInventoryItems();
                 Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu(Config, InventoryItems);
             }
@@ -172,7 +166,7 @@ namespace AutoConsume
             }
             else
             {
-                // open menu
+                // If there are no available items in the inventory, then open the menu
                 GetInventoryItems();
                 Game1.activeClickableMenu = (IClickableMenu)(object)new AutoConsumeMenu(Config, InventoryItems);
             }

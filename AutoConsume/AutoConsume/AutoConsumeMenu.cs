@@ -16,6 +16,9 @@ namespace AutoConsume
         private readonly List<ClickableTextureComponent> CheckBoxes = new List<ClickableTextureComponent>();
         private readonly List<ClickableTextureComponent> Arrows = new List<ClickableTextureComponent>();
         private readonly List<ClickableTextureComponent> ItemBoxes = new List<ClickableTextureComponent>();
+        private readonly List<ClickableTextureComponent> HealItemInfoIcons = new List<ClickableTextureComponent>();
+        private readonly List<ClickableTextureComponent> BuffItemInfoIcons = new List<ClickableTextureComponent>();
+        private readonly List<ClickableComponent> HealInfoTexts = new List<ClickableComponent>();
         private ClickableTextureComponent ExitButton;
         private ModConfig Config;
         private readonly List<Item> InventoryItems;
@@ -25,10 +28,12 @@ namespace AutoConsume
         private Rectangle RightArrow = new Rectangle(365, 494, 12, 12);
         private Rectangle LeftArrow = new Rectangle(352, 494, 12, 12);
         private Rectangle ItemBox = new Rectangle(293, 360, 24, 24);
-        private Rectangle InfoBox = new Rectangle(0, 0, 320, 180);
+        private Rectangle HIcon = new Rectangle(0, 438, 10, 10);
+        private Rectangle EIcon = new Rectangle(0, 428, 10, 10);
         private int healItemIdx = 0;
         private int buffItemIdx = 0;
         private const float ScaleFactor = 4f;
+        private const float IconScaleFactor = ScaleFactor / 1.5f;
 
         private static int menuWidth = (int)(Game1.uiViewport.Width/2.5);
         private static int menuHeight = (int)(Game1.uiViewport.Height/1.4); 
@@ -46,9 +51,10 @@ namespace AutoConsume
                     InventoryBuffItems.Add(buffItem);
             }
 
-            setIndex();
+            // Retrieve the item ID from the configuration, find the index of the InventoryItem, and then set the item index.
+            this.setIndex();
 
-            // setup position
+            // setup components position
             this.setUpPositions();
         }
 
@@ -93,6 +99,7 @@ namespace AutoConsume
                 }
                 tmpidx++;
             }
+
             if (!finditem)
             {
                 healItemIdx = 0;
@@ -159,7 +166,17 @@ namespace AutoConsume
             this.Arrows.Add(new ClickableTextureComponent("buff-item-right-arrow", new Rectangle(recX + arrowSize + paddingSize * 2 + (int)(ItemBox.Width * ScaleFactor * 0.9f), recY + spriteSize * 6 + itemBoxSize / 4, (int)(RightArrow.Width * ScaleFactor), (int)(RightArrow.Height * ScaleFactor)), "", "", Game1.mouseCursors, RightArrow, ScaleFactor));
             this.ItemBoxes.Add(new ClickableTextureComponent("buff-item-box", new Rectangle(recX + arrowSize + paddingSize, recY + spriteSize * 6, (int)(ItemBox.Width * ScaleFactor), (int)(ItemBox.Height * ScaleFactor)), "", "", Game1.mouseCursors, ItemBox, ScaleFactor * 0.9f));
             // set Info box position
+            this.HealItemInfoIcons.Add(new ClickableTextureComponent("HP-icon", new Rectangle(recX + 300, recY + spriteSize * 3, HIcon.Width*(int)IconScaleFactor, HIcon.Height*(int)IconScaleFactor), "", "", Game1.mouseCursors, HIcon, IconScaleFactor));
+            this.HealItemInfoIcons.Add(new ClickableTextureComponent("Energy-icon", new Rectangle(recX + 300, recY + spriteSize * 3 + EIcon.Width * (int)IconScaleFactor + paddingSize, EIcon.Width * (int)IconScaleFactor, EIcon.Height * (int)IconScaleFactor), "", "", Game1.mouseCursors, EIcon, IconScaleFactor));
 
+        }
+
+        private void setInformationIconPos()
+        {
+            // get heal information
+            int healthRecoverdAmount = InventoryItems[healItemIdx].healthRecoveredOnConsumption();
+            int EnergyRecoverdAmount = InventoryItems[healItemIdx].staminaRecoveredOnConsumption();
+            
         }
 
         private void handleButtonClick(string name)
@@ -291,6 +308,10 @@ namespace AutoConsume
             }
 
             // draw infomation
+            foreach (ClickableTextureComponent healIcon in this.HealItemInfoIcons)
+            {
+                healIcon.draw(b);
+            }
 
             // draw cursor
             this.drawMouse(b);
