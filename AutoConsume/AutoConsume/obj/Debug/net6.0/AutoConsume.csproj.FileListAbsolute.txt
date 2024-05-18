@@ -23,3 +23,5 @@ D:\StardewMods\StardewValley_Mods\AutoConsume\AutoConsume\obj\Debug\net6.0\AutoC
 D:\StardewMods\StardewValley_Mods\AutoConsume\AutoConsume\obj\Debug\net6.0\AutoConsume.csproj.CoreCompileInputs.cache
 D:\StardewMods\StardewValley_Mods\AutoConsume\AutoConsume\obj\Debug\net6.0\AutoConsume.sourcelink.json
 D:\StardewMods\StardewValley_Mods\AutoConsume\AutoConsume\obj\Debug\net6.0\AutoConsume.dll
+D:\StardewMods\StardewValley_Mods\AutoConsume\AutoConsume\bin\Debug\net6.0\config.json
+D:\StardewMods\StardewValley_Mods\AutoConsume\AutoConsume\bin\Debug\net6.0\manifest.json
