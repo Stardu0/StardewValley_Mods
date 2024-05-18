@@ -51,7 +51,7 @@ namespace AutoConsume
                     InventoryBuffItems.Add(buffItem);
             }
 
-            // Retrieve the item ID from the configuration, find the index of the InventoryItem, and then set the item index.
+            // Get the item ID from the configuration, find the index of the InventoryItem, and then set the item index.
             this.setIndex();
 
             // setup components position

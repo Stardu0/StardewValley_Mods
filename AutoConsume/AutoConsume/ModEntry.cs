@@ -94,14 +94,13 @@ namespace AutoConsume
             // ignore if player hasn't loaded a save yet
             if (!Context.IsWorldReady) return;
             if (!Config.AutoBuffKey) return;
-            
+            if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
             // check Buff
             if (!Game1.player.hasBuff("drink") && !Game1.player.hasBuff("food") && Game1.player.canMove && Game1.timeOfDay < 2400 && !Game1.IsFading()) ShouldBuff = true;
             else ShouldBuff = false;
 
             if (ShouldBuff)
             {
-                if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
                 GoBuff();
             }
 
@@ -112,6 +111,8 @@ namespace AutoConsume
             // ignore if player hasn't loaded a save yet
             if (!Context.IsWorldReady) return;
             if (!Config.AutoHealKey) return;
+            if (Game1.player.health <= 0) return;
+            if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
 
             // check health
             if (Game1.player.health <= Game1.player.maxHealth * 0.3 && Game1.player.canMove && !Game1.IsFading()) ShouldHeal = true;
@@ -119,7 +120,6 @@ namespace AutoConsume
 
             if (ShouldHeal)
             {
-                if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
                 GoHeal();
             }
 
