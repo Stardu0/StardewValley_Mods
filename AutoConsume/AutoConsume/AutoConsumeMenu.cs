@@ -101,10 +101,10 @@ namespace AutoConsume
                 tmpidx++;
             }
 
-            if (!finditem)
+            if (!finditem && InventoryItems.Count != 0)
             {
                 healItemIdx = 0;
-                Config.HealItemID = InventoryItems[healItemIdx].ItemId;
+                Config.HealItemID = InventoryItems[healItemIdx].ItemId; 
                 Config.HealItemQuality = InventoryItems[healItemIdx].Quality;
             }
 
@@ -121,7 +121,7 @@ namespace AutoConsume
                 tmpidx++;
             }
 
-            if (!finditem)
+            if (!finditem && InventoryBuffItems.Count != 0)
             {
                 buffItemIdx = 0;
                 Config.BuffItemID = InventoryBuffItems[buffItemIdx].ItemId;
@@ -287,6 +287,8 @@ namespace AutoConsume
                 checkbox.draw(b);     
             }
 
+            BuffInfoTexts.Clear();
+            BuffItemInfoIcons.Clear();
             // draw item box and arrows
             foreach (ClickableTextureComponent itembox in this.ItemBoxes)
             {
@@ -302,12 +304,12 @@ namespace AutoConsume
                         InventoryBuffItems[buffItemIdx].drawInMenu(b, new Vector2(itembox.bounds.X + 10, itembox.bounds.Y + 10), 1f);
                         // get buff information
 
-                        int tmpy = 1;
+                        //int tmpy = 1;
                         foreach (Buff curbuff in InventoryBuffItems[buffItemIdx].GetFoodOrDrinkBuffs())
                         {
                             //BuffItemInfoIcons.Add(new ClickableTextureComponent("buff", new Rectangle(this.xPositionOnScreen, this.yPositionOnScreen, 64, 64), "", "", curbuff.iconTexture, Game1.getSourceRectForStandardTileSheet(curbuff.iconTexture, curbuff.iconSheetIndex), IconScaleFactor));
-                            BuffInfoTexts.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen, this.yPositionOnScreen * tmpy, 1, 1), "test" + curbuff.effects.LuckLevel.ToString()));
-                            tmpy++;
+                            //BuffInfoTexts.Add(new ClickableComponent(new Rectangle(this.xPositionOnScreen, this.yPositionOnScreen * tmpy, 1, 1), "test" + curbuff.effects.LuckLevel.ToString()));
+                            //tmpy++;
                         }
 
 
