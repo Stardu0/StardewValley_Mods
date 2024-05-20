@@ -61,7 +61,7 @@ namespace AutoConsume
         private void OnButtonChanged(object? sender, ButtonsChangedEventArgs e)
         {
             if (!Game1.player.canMove) return;
-            if (!Context.IsWorldReady) return;
+            //if (!Context.IsWorldReady) return;
 
             if (Config.OpenMenuKey.JustPressed())
             {

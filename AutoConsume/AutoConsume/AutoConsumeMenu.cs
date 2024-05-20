@@ -20,6 +20,9 @@ namespace AutoConsume
         private readonly List<ClickableTextureComponent> BuffItemInfoIcons = new List<ClickableTextureComponent>();
         private readonly List<ClickableComponent> HealInfoTexts = new List<ClickableComponent>();
         private readonly List<ClickableComponent> BuffInfoTexts = new List<ClickableComponent>();
+        private readonly List<ClickableTextureComponent> SliderBars = new List<ClickableTextureComponent>();
+        private readonly List<ClickableTextureComponent> SliderButtons = new List<ClickableTextureComponent>();
+        private readonly List<ClickableComponent> BuffEndTimeTexts = new List<ClickableComponent>();
         private ClickableTextureComponent ExitButton;
         private ModConfig Config;
         private readonly List<Item> InventoryItems;
@@ -36,8 +39,8 @@ namespace AutoConsume
         private const float ScaleFactor = 4f;
         private const float IconScaleFactor = ScaleFactor / 1.5f;
 
-        private static int menuWidth = (int)(Game1.uiViewport.Width/2.5);
-        private static int menuHeight = (int)(Game1.uiViewport.Height/1.4); 
+        private static int menuWidth = (int)(Game1.uiViewport.Width/2);
+        private static int menuHeight = (int)(Game1.uiViewport.Height/1.2); 
 
         // Public Method
         public AutoConsumeMenu(ModConfig Config, List<Item> InventoryItems)
@@ -64,15 +67,9 @@ namespace AutoConsume
             Vector2 defaultPosition = new Vector2((Game1.uiViewport.Width - menuWidth)/2 , (Game1.uiViewport.Height - menuHeight)/2);
 
             //Force the viewport into a position that it should fit into on the screen???
-            if (defaultPosition.X + menuWidth > Game1.uiViewport.Width)
-            {
-                defaultPosition.X = 0;
-            }
+            if (defaultPosition.X + menuWidth > Game1.uiViewport.Width) defaultPosition.X = 0;
+            if (defaultPosition.Y + menuHeight > Game1.uiViewport.Height) defaultPosition.Y = 0;
 
-            if (defaultPosition.Y + menuHeight > Game1.uiViewport.Height)
-            {
-                defaultPosition.Y = 0;
-            }
             return defaultPosition;
 
         }
@@ -136,13 +133,15 @@ namespace AutoConsume
             string buffLabelText = "Auto Buff";
             string healItemText = "Heal Item";
             string buffItemText = "Buff Item";
+            string buffEndTimeText = "Buff End Time: ";
             int paddingSize = 20;
             int spriteSize = 9 * (int)ScaleFactor + paddingSize;
             int itemBoxSize = ItemBox.Width * (int)(ScaleFactor * 0.9f);
             int arrowSize = RightArrow.Width * (int)ScaleFactor;
             int recX = this.xPositionOnScreen + borderWidth;
             int recY = this.yPositionOnScreen + borderWidth;
-            
+            Rectangle sliderPos = new Rectangle(recX, recY + spriteSize * 8, 1, 1);
+
             // clear and initialized
             this.ExitButton = new ClickableTextureComponent("exit-button", new Rectangle(this.xPositionOnScreen + menuWidth, this.yPositionOnScreen, Game1.tileSize, Game1.tileSize), "", "", Game1.mouseCursors, new Rectangle(337, 493, 13, 13), ScaleFactor);
             this.Labels.Clear();
@@ -169,7 +168,24 @@ namespace AutoConsume
             // set Info box position
             this.HealItemInfoIcons.Add(new ClickableTextureComponent("HP-icon", new Rectangle(recX + 300, recY + spriteSize * 3, HIcon.Width*(int)IconScaleFactor, HIcon.Height*(int)IconScaleFactor), "", "", Game1.mouseCursors, HIcon, IconScaleFactor));
             this.HealItemInfoIcons.Add(new ClickableTextureComponent("Energy-icon", new Rectangle(recX + 300, recY + spriteSize * 3 + EIcon.Width * (int)IconScaleFactor + paddingSize, EIcon.Width * (int)IconScaleFactor, EIcon.Height * (int)IconScaleFactor), "", "", Game1.mouseCursors, EIcon, IconScaleFactor));
+            
+            // buff start and end time slider position
+            this.SliderBars.Add(new ClickableTextureComponent("slider-bar", sliderPos, "", "", Game1.mouseCursors, new Rectangle(403, 383, 2, 6), ScaleFactor));
+            for(int i = 0; i < 30; i++)
+            {
+                sliderPos.X += 2 * (int)ScaleFactor;
+                this.SliderBars.Add(new ClickableTextureComponent("slider-bar", sliderPos, "", "", Game1.mouseCursors, new Rectangle(405, 383, 2, 6), ScaleFactor));
+            }
+            sliderPos.X += 2 * (int)ScaleFactor;
+            this.SliderBars.Add(new ClickableTextureComponent("slider-bar", sliderPos, "", "", Game1.mouseCursors, new Rectangle(407, 383, 2, 6), ScaleFactor));
 
+            sliderPos.X -= 8 * (int)ScaleFactor;
+            sliderPos.Size = new Point(10 * (int)ScaleFactor, 6 * (int)ScaleFactor);
+            this.SliderButtons.Add(new ClickableTextureComponent("slider-button", sliderPos, "", "", Game1.mouseCursors, new Rectangle(420, 441, 10, 6), ScaleFactor));
+
+            // buff end time text position
+            sliderPos.X += 10 * (int)ScaleFactor + paddingSize;
+            this.BuffEndTimeTexts.Add(new ClickableComponent(sliderPos, buffEndTimeText));
         }
 
         private void setInformationIconPos()
@@ -206,6 +222,8 @@ namespace AutoConsume
                     break;
                 case "buff-item-right-arrow":
                     if (buffItemIdx + 1 < InventoryBuffItems.Count) buffItemIdx++;
+                    break;
+                case "slider-button":
                     break;
 
             }
@@ -246,6 +264,14 @@ namespace AutoConsume
                 }
             }
 
+            foreach (ClickableTextureComponent sliderbutton in this.SliderButtons.ToList())
+            {
+                if (sliderbutton.containsPoint(x, y))
+                {
+                    this.handleButtonClick(sliderbutton.name);
+                }
+            }
+
             if (ExitButton.containsPoint(x, y))
             {
                 this.handleButtonClick(ExitButton.name);
@@ -254,6 +280,7 @@ namespace AutoConsume
 
         public override void draw(SpriteBatch b)
         {
+            float textSize = 1.3f;
             // draw menu box
             IClickableMenu.drawTextureBox(b, this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, Color.Beige);
             // draw exit button
@@ -263,9 +290,9 @@ namespace AutoConsume
             {
                 // draw in a violet color so that the text can be seen when the background is dark
                 Color color = Color.Violet;
-                Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color, 1.3f);
+                Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color, textSize);
                 color = Game1.textColor;
-                Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color, 1.3f);
+                Utility.drawTextWithShadow(b, label.name, Game1.smallFont, new Vector2(label.bounds.X, label.bounds.Y), color, textSize);
             }
             
             // draw check boxes
@@ -321,6 +348,7 @@ namespace AutoConsume
                 arrow.draw(b);
             }
 
+
             // draw infomation
             /*
             foreach (ClickableTextureComponent healIcon in this.HealItemInfoIcons)
@@ -336,6 +364,24 @@ namespace AutoConsume
                 Utility.drawTextWithShadow(b, buffInfo.name, Game1.smallFont, new Vector2(buffInfo.bounds.X, buffInfo.bounds.Y), Game1.textColor, 1.5f);
             }
             */
+
+            // draw slider bar
+            foreach (ClickableTextureComponent sliderbar in this.SliderBars)
+            {
+                sliderbar.draw(b);
+            }
+            foreach (ClickableTextureComponent sliderbutton in this.SliderButtons)
+            {
+                sliderbutton.draw(b);
+            }
+            foreach (ClickableComponent buffendtimetext in this.BuffEndTimeTexts)
+            {
+                string text = "";
+                text += Config.BuffEndTime.ToString();
+                string text1 = text.Insert(2, ":");
+                Utility.drawTextWithShadow(b, buffendtimetext.name + text1, Game1.smallFont, new Vector2(buffendtimetext.bounds.X, buffendtimetext.bounds.Y), Game1.textColor, textSize / 1.3f);
+            }
+
             // draw cursor
             this.drawMouse(b);
         }
