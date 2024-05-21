@@ -61,7 +61,7 @@ namespace AutoConsume
         private void OnButtonChanged(object? sender, ButtonsChangedEventArgs e)
         {
             if (!Game1.player.canMove) return;
-            //if (!Context.IsWorldReady) return;
+            if (!Context.IsWorldReady) return;
 
             if (Config.OpenMenuKey.JustPressed())
             {
@@ -99,12 +99,9 @@ namespace AutoConsume
             if (!Config.AutoBuffKey) return;
             if (Game1.activeClickableMenu is AutoConsumeMenu autoConsumeMenu) return;
             // check Buff
-            if (!Game1.player.hasBuff("drink") && !Game1.player.hasBuff("food"))
+            if (!Game1.player.hasBuff("drink") && !Game1.player.hasBuff("food") && Game1.player.canMove && !Game1.IsFading() && Game1.timeOfDay >= Config.BuffStartTime && Game1.timeOfDay < Config.BuffEndTime)
             {
-                if (Game1.player.canMove && !Game1.IsFading())
-                {
-                    if (Game1.timeOfDay >= Config.BuffStartTime && Game1.timeOfDay < Config.BuffEndTime) ShouldBuff = true;
-                }
+                ShouldBuff = true;
             }
             else ShouldBuff = false;
 

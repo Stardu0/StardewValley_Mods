@@ -16,7 +16,7 @@ namespace AutoConsume
         public const int pixelsHigh = 6;
         public const int sliderButtonWidth = 10;
         public const int sliderMaxValue = 100;
-        public int value = 120;
+        public int value;
 
         ModConfig Config;
 
@@ -30,6 +30,14 @@ namespace AutoConsume
             : base(label, x, y, width, height, whichOption)
         {
             this.Config = Config;
+            setValue();
+        }
+
+        public void setValue()
+        {
+            int hour = Config.BuffEndTime / 100;
+            int minute = Config.BuffEndTime % 100;
+            value = (hour * 60 + minute - 360) / 10;
         }
 
         public override void leftClickHeld(int x, int y)
@@ -37,6 +45,7 @@ namespace AutoConsume
             if (!greyedOut)
             {
                 base.leftClickHeld(x, y);
+                if (y < bounds.Y - 8 || y > bounds.Y + 32) return;
                 if (x < bounds.X)
                 {
                     value = 0;
