@@ -16,7 +16,7 @@ namespace AutoConsume
         public const int pixelsHigh = 6;
         public const int sliderButtonWidth = 10;
         public const int sliderMaxValue = 100;
-        public int value;
+        public int value = 120;
 
         ModConfig Config;
 
@@ -60,7 +60,6 @@ namespace AutoConsume
             {
                 base.receiveLeftClick(x, y);
                 leftClickHeld(x, y);
-                Game1.playSound("coin");
             }
         }
 
@@ -75,7 +74,7 @@ namespace AutoConsume
         public override void draw(SpriteBatch b, int slotX, int slotY, IClickableMenu context = null)
         {
             base.draw(b, slotX, slotY, context);
-            IClickableMenu.drawTextureBox(b, Game1.mouseCursors, sliderBGSource, slotX + bounds.X, slotY + bounds.Y, bounds.Width, bounds.Height, Color.White, 4f, drawShadow: false);
+            IClickableMenu.drawTextureBox(b, Game1.mouseCursors, sliderBGSource, slotX + bounds.X, slotY + bounds.Y, bounds.Width + 30, bounds.Height, Color.White, 4f, drawShadow: false);
             b.Draw(Game1.mouseCursors, new Vector2((float)(slotX + bounds.X) + (float)(bounds.Width - 40) * ((float)value / 100f), slotY + bounds.Y), sliderButtonRect, Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.9f);
         }
     }

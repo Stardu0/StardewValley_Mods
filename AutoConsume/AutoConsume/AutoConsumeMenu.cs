@@ -20,8 +20,6 @@ namespace AutoConsume
         private readonly List<ClickableTextureComponent> BuffItemInfoIcons = new List<ClickableTextureComponent>();
         private readonly List<ClickableComponent> HealInfoTexts = new List<ClickableComponent>();
         private readonly List<ClickableComponent> BuffInfoTexts = new List<ClickableComponent>();
-        private readonly List<ClickableTextureComponent> SliderBars = new List<ClickableTextureComponent>();
-        private readonly List<ClickableTextureComponent> SliderButtons = new List<ClickableTextureComponent>();
         private readonly List<ClickableComponent> BuffEndTimeTexts = new List<ClickableComponent>();
         private ClickableTextureComponent ExitButton;
         private ModConfig Config;
@@ -64,7 +62,7 @@ namespace AutoConsume
             // setup components position
             this.setUpPositions();
 
-            this.slider = new AutoConsumeOptionsSlider("", this.Config, -1);
+            this.slider = new AutoConsumeOptionsSlider("", this.Config, -1, this.xPositionOnScreen + borderWidth, this.yPositionOnScreen + borderWidth + (9 * (int)ScaleFactor + 20) * 8);
         }
 
         public static Vector2 getAppropriateMenuPosition()
@@ -173,23 +171,9 @@ namespace AutoConsume
             // set Info box position
             this.HealItemInfoIcons.Add(new ClickableTextureComponent("HP-icon", new Rectangle(recX + 300, recY + spriteSize * 3, HIcon.Width*(int)IconScaleFactor, HIcon.Height*(int)IconScaleFactor), "", "", Game1.mouseCursors, HIcon, IconScaleFactor));
             this.HealItemInfoIcons.Add(new ClickableTextureComponent("Energy-icon", new Rectangle(recX + 300, recY + spriteSize * 3 + EIcon.Width * (int)IconScaleFactor + paddingSize, EIcon.Width * (int)IconScaleFactor, EIcon.Height * (int)IconScaleFactor), "", "", Game1.mouseCursors, EIcon, IconScaleFactor));
-            
-            // buff start and end time slider position
-            this.SliderBars.Add(new ClickableTextureComponent("slider-bar", sliderPos, "", "", Game1.mouseCursors, new Rectangle(403, 383, 2, 6), ScaleFactor));
-            for(int i = 0; i < 30; i++)
-            {
-                sliderPos.X += 2 * (int)ScaleFactor;
-                this.SliderBars.Add(new ClickableTextureComponent("slider-bar", sliderPos, "", "", Game1.mouseCursors, new Rectangle(405, 383, 2, 6), ScaleFactor));
-            }
-            sliderPos.X += 2 * (int)ScaleFactor;
-            this.SliderBars.Add(new ClickableTextureComponent("slider-bar", sliderPos, "", "", Game1.mouseCursors, new Rectangle(407, 383, 2, 6), ScaleFactor));
-
-            sliderPos.X -= 8 * (int)ScaleFactor;
-            sliderPos.Size = new Point(10 * (int)ScaleFactor, 6 * (int)ScaleFactor);
-            this.SliderButtons.Add(new ClickableTextureComponent("slider-button", sliderPos, "", "", Game1.mouseCursors, new Rectangle(420, 441, 10, 6), ScaleFactor));
 
             // buff end time text position
-            sliderPos.X += 10 * (int)ScaleFactor + paddingSize;
+            sliderPos.X = this.xPositionOnScreen + borderWidth + paddingSize + 222;
             this.BuffEndTimeTexts.Add(new ClickableComponent(sliderPos, buffEndTimeText));
         }
 
@@ -228,8 +212,6 @@ namespace AutoConsume
                 case "buff-item-right-arrow":
                     if (buffItemIdx + 1 < InventoryBuffItems.Count) buffItemIdx++;
                     break;
-                case "slider-button":
-                    break;
 
             }
 
@@ -266,14 +248,6 @@ namespace AutoConsume
                 if (arrow.containsPoint(x, y))
                 {
                     this.handleButtonClick(arrow.name);
-                }
-            }
-
-            foreach (ClickableTextureComponent sliderbutton in this.SliderButtons.ToList())
-            {
-                if (sliderbutton.containsPoint(x, y))
-                {
-                    this.handleButtonClick(sliderbutton.name);
                 }
             }
 
@@ -379,24 +353,17 @@ namespace AutoConsume
             */
 
             // draw slider bar
-            foreach (ClickableTextureComponent sliderbar in this.SliderBars)
-            {
-                sliderbar.draw(b);
-            }
-            foreach (ClickableTextureComponent sliderbutton in this.SliderButtons)
-            {
-                sliderbutton.draw(b);
-            }
+            this.slider.draw(b, 0, 0);
+
             foreach (ClickableComponent buffendtimetext in this.BuffEndTimeTexts)
             {
                 string text = "";
                 text += Config.BuffEndTime.ToString();
-                string text1 = text.Insert(2, ":");
+                string text1 = text.Insert(text.Length - 2, ":");
                 Utility.drawTextWithShadow(b, buffendtimetext.name + text1, Game1.smallFont, new Vector2(buffendtimetext.bounds.X, buffendtimetext.bounds.Y), Game1.textColor, textSize / 1.3f);
             }
 
 
-            this.slider.draw(b, this.xPositionOnScreen, this.yPositionOnScreen);
 
             // draw cursor
             this.drawMouse(b);
