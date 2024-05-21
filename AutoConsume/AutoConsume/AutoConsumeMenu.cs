@@ -40,7 +40,10 @@ namespace AutoConsume
         private const float IconScaleFactor = ScaleFactor / 1.5f;
 
         private static int menuWidth = (int)(Game1.uiViewport.Width/2);
-        private static int menuHeight = (int)(Game1.uiViewport.Height/1.2); 
+        private static int menuHeight = (int)(Game1.uiViewport.Height/1.2);
+
+        private AutoConsumeOptionsSlider slider;
+
 
         // Public Method
         public AutoConsumeMenu(ModConfig Config, List<Item> InventoryItems)
@@ -60,6 +63,8 @@ namespace AutoConsume
 
             // setup components position
             this.setUpPositions();
+
+            this.slider = new AutoConsumeOptionsSlider("", this.Config, -1);
         }
 
         public static Vector2 getAppropriateMenuPosition()
@@ -276,6 +281,14 @@ namespace AutoConsume
             {
                 this.handleButtonClick(ExitButton.name);
             }
+
+            this.slider.receiveLeftClick(x, y);
+        }
+
+        public override void leftClickHeld(int x, int y)
+        {
+            base.leftClickHeld(x, y);
+            this.slider.leftClickHeld(x, y);
         }
 
         public override void draw(SpriteBatch b)
@@ -381,6 +394,9 @@ namespace AutoConsume
                 string text1 = text.Insert(2, ":");
                 Utility.drawTextWithShadow(b, buffendtimetext.name + text1, Game1.smallFont, new Vector2(buffendtimetext.bounds.X, buffendtimetext.bounds.Y), Game1.textColor, textSize / 1.3f);
             }
+
+
+            this.slider.draw(b, this.xPositionOnScreen, this.yPositionOnScreen);
 
             // draw cursor
             this.drawMouse(b);

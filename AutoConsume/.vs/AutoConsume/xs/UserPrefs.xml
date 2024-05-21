@@ -7,14 +7,15 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="AutoConsume/AutoConsumeMenu.cs">
     <Files>
       <File FileName="AutoConsume/config.json" Line="10" Column="1" IsPinned="True" />
-      <File FileName="AutoConsume/AutoConsumeMenu.cs" Line="32" Column="37" />
-      <File FileName="AutoConsume/ModEntry.cs" Line="26" Column="6" />
+      <File FileName="AutoConsume/AutoConsumeMenu.cs" Line="271" Column="1" IsPinned="True" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="AutoConsume">
-            <Node name="AutoConsume" expanded="True" />
+          <Node name="AutoConsume" expanded="True">
+            <Node name="AutoConsume" expanded="True">
+              <Node name="AutoConsumeMenu.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
