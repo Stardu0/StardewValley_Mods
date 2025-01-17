@@ -6,7 +6,7 @@ using StardewValley.Menus;
 
 namespace AutoConsume
 {
-    public class AutoConsumeOptionsSlider : AutoConsumeOptionsElements
+    public class AutoConsumeOptionsSlider : OptionsElement
     {
         // Fields
         public static Rectangle sliderBGSource = new Rectangle(403, 383, 6, 6);
@@ -19,12 +19,6 @@ namespace AutoConsume
         public int value;
 
         ModConfig Config;
-
-        public AutoConsumeOptionsSlider(string label, ModConfig Config)
-            : base(label)
-        {
-            this.Config = Config;
-        }
 
         public AutoConsumeOptionsSlider(string label, ModConfig Config, int whichOption, int x = -1, int y = -1, int width = 192, int height = 24)
             : base(label, x, y, width, height, whichOption)
@@ -83,7 +77,7 @@ namespace AutoConsume
         public override void draw(SpriteBatch b, int slotX, int slotY, IClickableMenu context = null)
         {
             base.draw(b, slotX, slotY, context);
-            IClickableMenu.drawTextureBox(b, Game1.mouseCursors, sliderBGSource, slotX + bounds.X, slotY + bounds.Y, bounds.Width + 30, bounds.Height, Color.White, 4f, drawShadow: false);
+            IClickableMenu.drawTextureBox(b, Game1.mouseCursors, sliderBGSource, slotX + bounds.X, slotY + bounds.Y, bounds.Width, bounds.Height, Color.White, 4f, drawShadow: false);
             b.Draw(Game1.mouseCursors, new Vector2((float)(slotX + bounds.X) + (float)(bounds.Width - 40) * ((float)value / 100f), slotY + bounds.Y), sliderButtonRect, Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.9f);
         }
     }
